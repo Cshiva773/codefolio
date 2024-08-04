@@ -2,6 +2,7 @@ import React from 'react'
 import Home from './Home'
 import Sidebar from './Sidebar'
 import Header from './Header'
+import CodingProfile from './SideBar/Codingprofile'
 
 function Dashboard() {
   return (
@@ -9,6 +10,7 @@ function Dashboard() {
         <Header />
         <Home />
         <Sidebar />
+        <CodingProfile />
     </div>
   )
 }
