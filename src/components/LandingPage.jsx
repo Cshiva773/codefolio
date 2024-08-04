@@ -1,8 +1,11 @@
 import React from 'react'
-
+import LoginButton from './auth/login'
 function LandingPage() {
   return (
-    <div>LandingPage</div>
+    <div>
+      LandingPage<br/> 
+      <LoginButton />
+    </div>
   )
 }
 
