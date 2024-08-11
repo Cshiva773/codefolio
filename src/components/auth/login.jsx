@@ -4,13 +4,11 @@ import Dashboard from "../dashboard/Dashboard";
 
 const LoginButton = () => {
   const { loginWithRedirect,user,isAuthenticated,logout } = useAuth0();
-  console.log("current user",user);
   return(
     <>
       {
         isAuthenticated ? (
           <>
-            <Dashboard />
             <button onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>
               Log Out
             </button>
