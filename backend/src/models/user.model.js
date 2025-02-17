@@ -21,14 +21,18 @@ const userSchema = new mongoose.Schema({
       required: true,
       minLength: 8
     },
+    isAdmin:{
+      type:Boolean,
+      default:false
+    },
+    isEmailVerified:{
+      type:Boolean,
+      default:false
+    },
     fullName: {
       type: String,
       required: true,
       trim: true
-    },
-    profilePicture:{
-      type:String,
-      required:true,
     },
     profileInfo: {
       batchYear: Number,
@@ -51,6 +55,15 @@ const userSchema = new mongoose.Schema({
       },
       resume: String
     },
+    energyPoints: {
+      total: { type: Number, default: 0 },
+      breakdown: {
+        problemsSolving: { type: Number, default: 0 },
+        contestParticipation: { type: Number, default: 0 },
+        forumContributions: { type: Number, default: 0 },
+        githubActivity: { type: Number, default: 0 }
+      }
+    },
     codingStats: {
       totalProblemsSolved: { type: Number, default: 0 },
       problemsByDifficulty: {
@@ -67,7 +80,15 @@ const userSchema = new mongoose.Schema({
       profileViews: { type: Number, default: 0 },
       totalActiveDays: { type: Number, default: 0 },
       streakCount: { type: Number, default: 0 },
-      lastSubmission: Date
+      lastSubmission: Date,
+      languageStats: {
+        type: Map,
+        of: {
+          problemsSolved: Number,
+          lastUsed: Date
+        },
+        default: new Map()
+      }
     },
     preferences: {
       emailNotifications: { type: Boolean, default: true },
@@ -83,4 +104,24 @@ const userSchema = new mongoose.Schema({
     }
     next();
   });
+  userSchema.methods.verifyPassword=async function(password){
+    return await bcrypt.compare(password,this.password);
+}
+userSchema.methods.generateAccessToken=function(){
+    return jwt.sign({
+        _id:this._id,
+        email:this.email,
+        username:this.username,
+        fullname:this.fullname,
+    },process.env.ACCESS_TOKEN_SECRET,{
+        expiresIn:process.env.ACCESS_TOKEN_EXPIRY
+    }) 
+}
+userSchema.methods.generateRefreshToken=function(){
+    return jwt.sign({
+        _id:this._id
+    },process.env.REFRESH_TOKEN_SECRET,{
+        expiresIn:process.env.REFRESH_TOKEN_EXPIRY
+    })
+}
 export const User=mongoose.model("User",userSchema);
