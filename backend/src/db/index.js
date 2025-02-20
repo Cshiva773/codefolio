@@ -1,14 +1,21 @@
-import mongoose from 'mongoose'
-import { DB_NAME } from '../constants.js'
+import mongoose from "mongoose";
+import dotenv from "dotenv";
 
-const connectDB=async () =>{
-    try{
-        await mongoose.connect(`${process.env.DB_URL}/${DB_NAME}`)
-        console.log("Database connected")
-        
-    }catch(err){
-        console.error("Error",err);
-        process.exit(1)
-    }
-}
-export default connectDB
+dotenv.config();
+
+const connectDB = async () => {
+  try {
+    const uri = process.env.DB_URL;
+    if (!uri) throw new Error("DB_URL is missing in .env file");
+
+    await mongoose.connect(uri);
+    console.log("MongoDB connected successfully!");
+  } catch (error) {
+    console.error("MongoDB connection error:", error.message);
+    process.exit(1);
+  }
+};
+
+export default connectDB;
+
+

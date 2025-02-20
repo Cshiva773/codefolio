@@ -1,1 +1,1 @@
-export const DB_NAME="codetracker"
+export const DB_NAME="codetracker";
