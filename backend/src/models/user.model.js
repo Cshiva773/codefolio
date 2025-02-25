@@ -95,7 +95,10 @@ const userSchema = new mongoose.Schema({
       publicProfile: { type: Boolean, default: true },
       theme: { type: String, default: 'light' },
       language: { type: String, default: 'en' }
-    }
+    },
+    refreshToken:{
+      type:String,
+  },
   }, { timestamps: true });
   
   userSchema.pre('save', async function(next) {
