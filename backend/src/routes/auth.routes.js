@@ -1,6 +1,6 @@
 import express from "express";
 import { signup, login, logout, refreshToken } from "../controllers/auth.controller.js";
-import { verifyToken } from "../middlewares/auth.middleware.js";
+import { verifyJWT } from "../middlewares/auth.middleware.js";
 import {upload} from "../middlewares/multer.middleware.js"
 
 const router = express.Router();
@@ -10,6 +10,6 @@ router.route("/signup").post(upload.fields([
 ]), signup);
 router.post("/login", login);
 router.post("/refresh-token", refreshToken);
-router.post("/logout", verifyToken, logout);
+router.post("/logout", verifyJWT, logout);
 
 export default router;
