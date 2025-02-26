@@ -70,24 +70,51 @@ export const signup = async (req, res) => {
 
 export const login = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email,username,password } = req.body;
     
     const user = await User.findOne({ email });
     if (!user || !(await user.verifyPassword(password))) {
       return res.status(400).json({ message: "Invalid credentials" });
     }
 
-    const accessToken = user.generateAccessToken();
-    const refreshToken = user.generateRefreshToken();
+    const {accessToken, refreshToken} = await generateAccessAndRefreshToken(user._id)
+    const loggedInUser= await User.findById(user._id).select("-password -refreshToken")
 
-    res.json({ message: "Login successful", accessToken, refreshToken });
+    const options={
+      httpOnly: true,
+      secure: true
+    }
+    return res
+    .status(200)
+    .cookie("accessToken", accessToken, options)
+    .cookie("refreshToken", refreshToken, options)
+    .json(
+      { message: "User logged in", user: loggedInUser, accessToken, refreshToken }
+    )
   } catch (error) {
     res.status(500).json({ message: "Error logging in", error });
   }
 };
 
-export const logout = (req, res) => {
-  res.json({ message: "User logged out" });
+export const logout = async(req, res) => {
+  try {
+    await User.findByIdAndUpdate(req.user._id,{
+      $set:{
+        refreshToken:undefined
+      }
+    },
+    {
+      new:true
+    }
+  )
+    const options={
+      httpOnly: true,
+      secure: true
+    }
+    res.status(200).clearCookie("accessToken",options).clearCookie("refreshToken",options).json({ message: "User logged out" });
+  } catch (error) {
+    res.status(500).json({ message: "Error logging out", error });
+  }
 };
 
 export const refreshToken = (req, res) => {
