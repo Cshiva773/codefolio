@@ -45,14 +45,9 @@ const userSchema = new mongoose.Schema({
     socialLinks: {
       portfolio: String,
       linkedin: String,
-      leetcode: {
-        username: String,
-        profile: String
-      },
-      github: {
-        username: String,
-        profile: String
-      },
+      leetcode: String,
+      codeforces: String,
+      github: String,
       resume: String
     },
     energyPoints: {
