@@ -16,7 +16,7 @@ const generateAccessAndRefreshToken = async (userId) => {
 
   }
   catch (error) {
-    throw res.status(500).json({ message: "Error generating token", error })
+    throw new ApiError(500, "Error generating token", error);
   }
 }
 
@@ -154,11 +154,10 @@ export const refreshToken = async (req, res) => {
 
 export const changeCurrentPassword = async (req, res) => {
   const { currentPassword, newPassword } = req.body
-  console.log(req.body)
+  console.log(currentPassword,newPassword)
   if (!currentPassword || !newPassword) {
     throw new ApiError(400, "Please provide current and new password")
   }
-  console.log(req.user)
   const user = await User.findById(req.user._id)
   if (!user) {
     throw new ApiError(404, "User not found")
