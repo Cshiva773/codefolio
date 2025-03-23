@@ -22,30 +22,18 @@ const generateAccessAndRefreshToken = async (userId) => {
 
 
 export const signup = async (req, res) => {
-  try {
+  try {    
+    console.log(req.body)
     const { username, email, password, fullName } = req.body;
 
-    if ([fullName, email, username, password].some((field) => field?.trim() === "")) {
-      throw res.status(400).json({ message: "Please fill all fields" })
+    if (!username || !email || !password || !fullName) {
+      return res.status(400).json({ message: "All fields are required." });
     }
 
-    const existingUser = await User.findOne({
-      $or: [{ username }, { email }]
-    })
+    const existingUser = await User.findOne({ $or: [{ username }, { email }] });
+
     if (existingUser) {
       return res.status(400).json({ message: "User already exists" });
-    }
-
-    const avatarLocalPath = req.files?.avatar[0]?.path
-
-    if (!avatarLocalPath) {
-      return res.status(400).json({ message: "Please upload an avatar" })
-    }
-
-    const avatarResponse = await uploadOnCloudinary(avatarLocalPath)
-
-    if (!avatarResponse) {
-      return res.status(500).json({ message: "Error uploading avatar" })
     }
 
     const user = new User({
@@ -53,23 +41,23 @@ export const signup = async (req, res) => {
       email,
       password,
       fullName,
-      profileInfo: { profilePicture: avatarResponse.url }, // Save avatar in profileInfo
+      profileInfo: { profilePicture: "" },
     });
+
     await user.save();
 
-    //const accessToken = user.generateAccessToken();
-    //const refreshToken = user.generateRefreshToken();
-    const createdUser = await User.findById(user._id).select("-password -refreshToken")
-
+    const createdUser = await User.findById(user._id).select("-password -refreshToken");
     if (!createdUser) {
-      return res.status(500).json({ message: "Error creating user" })
+      return res.status(500).json({ message: "Error creating user" });
     }
+
     return res.status(201).json({ message: "User registered", user: createdUser });
-    // res.status(201).json({ message: "User registered", accessToken, refreshToken });
   } catch (error) {
-    res.status(500).json({ message: "Error signing up", error });
+    console.error("Signup error:", error); // Show actual error in the backend
+    res.status(500).json({ message: "Error signing up", error: error.message });
   }
 };
+
 
 export const login = async (req, res) => {
   try {
