@@ -18,52 +18,30 @@ const Signup = () => {
   const navigate = useNavigate();
   const { signup } = useAuth();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  // Inside handleSubmit function in Signup.jsx
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  
+  // Form validation (keep your existing validation)
+  
+  try {
+    // Use the userData object structure that matches your API expectations
+    const userData = { username, fullName, email, password };
     
-    // Form validation
-    if (password.length < 8) {
-        toast.error("Password must be at least 8 characters long.");
-        return;
-    }
-    if(username.length < 4) {
-        toast.error("Username must be at least 4 characters long.");
-        return;
-    }
+    // Let the AuthContext handle the API call
+    await signup(userData);
     
-    if (!username || !fullName || !email || !password) {
-      setError("All fields are required.");
-      toast.error("All fields are required.");
-      return;
-    }
-
-    try {
-      const response = await fetch("http://localhost:3000/api/auth/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, fullName, email, password }),
-      });
-
-      const data = await response.json();
-      if (!response.ok) {
-        throw new Error(data.message || "Signup failed");
-      }
-      
-      // Use the signup function from context 
-      const userData = { ...data.user, username, fullName, email };
-      signup(userData);
-      
-      toast.success("Signup successful! Redirecting...");
-      
-      // Navigate to social profile after a short delay
-      setTimeout(() => {
-        navigate("/social-profile");
-      }, 1000);
-    } catch (err) {
-      setError(err.message);
-      toast.error(err.message || "Something went wrong!");
-    }
-  };
+    toast.success("Signup successful! Redirecting...");
+    
+    // Navigate to social profile after a short delay
+    setTimeout(() => {
+      navigate("/social-profile");
+    }, 1000);
+  } catch (err) {
+    setError(err.message);
+    toast.error(err.message || "Something went wrong!");
+  }
+};
 
   return (
     <div className="login-main">

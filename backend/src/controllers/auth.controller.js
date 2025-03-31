@@ -3,6 +3,7 @@ import { User } from "../models/User.model.js";
 import ApiError from "../utils/ApiError.js";
 import ApiResponse from "../utils/ApiResponse.js";
 import { uploadOnCloudinary } from '../utils/cloudinary.js';
+import dotenv from "dotenv";
 
 
 const generateAccessAndRefreshToken = async (userId) => {
@@ -21,15 +22,30 @@ const generateAccessAndRefreshToken = async (userId) => {
 }
 
 
+
+dotenv.config(); // Load environment variables
+
 export const signup = async (req, res) => {
   try {    
-    console.log(req.body)
+    console.log(req.body);
     const { username, email, password, fullName } = req.body;
 
-    if (!username || !email || !password || !fullName) {
-      return res.status(400).json({ message: "All fields are required." });
-    }
-
+    if (!username) {
+      return res.status(400).json({ message: "Username is required." });
+  }
+  
+  if (!email) {
+      return res.status(400).json({ message: "Email is required." });
+  }
+  
+  if (!password) {
+      return res.status(400).json({ message: "Password is required." });
+  }
+  
+  if (!fullName) {
+      return res.status(400).json({ message: "Full Name is required." });
+  }
+  
     const existingUser = await User.findOne({ $or: [{ username }, { email }] });
 
     if (existingUser) {
@@ -51,9 +67,25 @@ export const signup = async (req, res) => {
       return res.status(500).json({ message: "Error creating user" });
     }
 
-    return res.status(201).json({ message: "User registered", user: createdUser });
+    // ✅ Generate JWT Token with ACCESS_TOKEN_SECRET from .env
+    const token = jwt.sign(
+      { id: createdUser._id, email: createdUser.email }, 
+      process.env.ACCESS_TOKEN_SECRET, 
+      { expiresIn: process.env.ACCESS_TOKEN_EXPIRY }
+    );
+
+    console.log("Generated Token:", token); // ✅ Debugging
+
+
+    return res.status(201).json({ 
+      message: "User registered", 
+      user: createdUser,
+      token  // ✅ Make sure token is included in response
+    });
+    
+
   } catch (error) {
-    console.error("Signup error:", error); // Show actual error in the backend
+    console.error("Signup error:", error);
     res.status(500).json({ message: "Error signing up", error: error.message });
   }
 };
@@ -89,22 +121,26 @@ export const login = async (req, res) => {
 
 export const logout = async (req, res) => {
   try {
-    await User.findByIdAndUpdate(req.user._id, {
-      $set: {
-        refreshToken: undefined
-      }
-    },
-      {
-        new: true
-      }
-    )
+    // If you have a user, update their refresh token
+    if (req.user && req.user._id) {
+      await User.findByIdAndUpdate(req.user._id, {
+        $set: { refreshToken: undefined }
+      }, { new: true });
+    }
+    
+    // Clear cookies regardless
     const options = {
       httpOnly: true,
       secure: true
-    }
-    res.status(200).clearCookie("accessToken", options).clearCookie("refreshToken", options).json({ message: "User logged out" });
+    };
+    
+    res.status(200)
+      .clearCookie("accessToken", options)
+      .clearCookie("refreshToken", options)
+      .json({ message: "User logged out" });
   } catch (error) {
-    res.status(500).json({ message: "Error logging out", error });
+    console.error("Logout error:", error);
+    res.status(500).json({ message: "Error logging out", error: error.message });
   }
 };
 
