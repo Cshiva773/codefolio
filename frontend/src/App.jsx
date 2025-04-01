@@ -7,6 +7,7 @@ import Login from "./pages/auth/Login";
 import Signup from "./pages/auth/Signup";
 import SocialProfile from "./pages/SocialProfile";
 import { AuthProvider, useAuth } from "./AuthContext";
+import GithubDashboard from "./components/GithubDashboard";
 
 // Protected route component
 const ProtectedRoute = ({ children }) => {
@@ -59,6 +60,15 @@ function AppRoutes() {
               <Dashboard />
             </ProtectedRoute>
           } 
+        />
+
+        <Route
+          path="/github"
+          element={
+            <ProtectedRoute>
+              <GithubDashboard />
+            </ProtectedRoute>
+          }
         />
 
         <Route path="*" element={<div>404 - Page Not Found</div>} />
