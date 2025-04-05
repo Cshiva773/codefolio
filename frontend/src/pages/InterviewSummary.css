@@ -1,0 +1,220 @@
+.interview-summary {
+    background-color: #f7fafc;
+    border-radius: 0.5rem;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .interview-summary h2 {
+    text-align: center;
+    color: #1a365d;
+    margin-top: 0;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+  }
+  
+  .overall-score {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  
+  .overall-score h3 {
+    color: #2d3748;
+    margin-bottom: 1rem;
+  }
+  
+  .score-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .score-circle span {
+    font-size: 2.5rem;
+    line-height: 1;
+  }
+  
+  .score-circle small {
+    font-size: 1rem;
+    opacity: 0.7;
+  }
+  
+  .score-circle.excellent {
+    background-color: #9ae6b4;
+    color: #22543d;
+  }
+  
+  .score-circle.good {
+    background-color: #faf089;
+    color: #744210;
+  }
+  
+  .score-circle.average {
+    background-color: #fbd38d;
+    color: #7b341e;
+  }
+  
+  .score-circle.poor {
+    background-color: #feb2b2;
+    color: #822727;
+  }
+  
+  .category-scores {
+    margin-bottom: 2rem;
+  }
+  
+  .category-scores h3 {
+    color: #2d3748;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 0.5rem;
+  }
+  
+  .score-category {
+    margin-bottom: 1rem;
+    background-color: white;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  }
+  
+  .category-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .category-header h4 {
+    margin: 0;
+    color: #4a5568;
+    font-size: 1.125rem;
+  }
+  
+  .category-score {
+    font-weight: bold;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+  }
+  
+  .category-score.excellent {
+    background-color: #9ae6b4;
+    color: #22543d;
+  }
+  
+  .category-score.good {
+    background-color: #faf089;
+    color: #744210;
+  }
+  
+  .category-score.average {
+    background-color: #fbd38d;
+    color: #7b341e;
+  }
+  
+  .category-score.poor {
+    background-color: #feb2b2;
+    color: #822727;
+  }
+  
+  .detailed-feedback {
+    margin-bottom: 2rem;
+  }
+  
+  .detailed-feedback h3 {
+    color: #2d3748;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 0.5rem;
+  }
+  
+  .feedback-content {
+    background-color: white;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    line-height: 1.6;
+    white-space: pre-line;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  }
+  
+  .interview-transcript {
+    margin-bottom: 2rem;
+  }
+  
+  .interview-transcript h3 {
+    color: #2d3748;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 0.5rem;
+  }
+  
+  .transcript-message {
+    background-color: white;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s;
+  }
+  
+  .transcript-message:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .transcript-message.expanded {
+    background-color: #edf2f7;
+  }
+  
+  .transcript-agent, .transcript-user {
+    margin-bottom: 0.5rem;
+  }
+  
+  .transcript-agent strong, .transcript-user strong {
+    color: #4a5568;
+    margin-right: 0.5rem;
+  }
+  
+  .summary-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  .download-button, .reset-button {
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.375rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  .download-button {
+    background-color: #3182ce;
+    color: white;
+    border: none;
+  }
+  
+  .download-button:hover {
+    background-color: #2b6cb0;
+  }
+  
+  .reset-button {
+    background-color: #edf2f7;
+    color: #4a5568;
+    border: 1px solid #cbd5e0;
+  }
+  
+  .reset-button:hover {
+    background-color: #e2e8f0;
+  }
+  
+  

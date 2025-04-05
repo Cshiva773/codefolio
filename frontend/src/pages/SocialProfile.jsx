@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { useAuth } from '../AuthContext'
 import sImage from "../assets/social-profile.jpg";
+import TotalActiveDays from '../components/LeetCodeDashboard'
 
 
 const SocialProfile = () => {
@@ -219,7 +220,6 @@ const SocialProfile = () => {
               value={collegeName}
               onChange={(e) => setCollegeName(e.target.value)}
             />
-            
             
             
             <input 

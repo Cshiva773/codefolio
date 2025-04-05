@@ -1,0 +1,173 @@
+.side-navbar {
+    width: 240px;
+    height: 100vh;
+    background-color: white;
+    border-right: 1px solid #e2e8f0;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 50;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  }
+  
+  .nav-profile {
+    padding: 24px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  
+  .profile-avatar {
+    width: 64px;
+    height: 64px;
+    background-color: #4299e1;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin-bottom: 12px;
+  }
+  
+  .profile-info {
+    text-align: center;
+  }
+  
+  .profile-info h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 4px 0;
+    color: #2d3748;
+  }
+  
+  .profile-info p {
+    font-size: 14px;
+    color: #718096;
+    margin: 0;
+  }
+  
+  .nav-stats {
+    display: flex;
+    justify-content: space-around;
+    padding: 16px;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  
+  .stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .stat-value {
+    font-size: 18px;
+    font-weight: 600;
+    color: #4299e1;
+  }
+  
+  .stat-label {
+    font-size: 12px;
+    color: #718096;
+    margin-top: 4px;
+  }
+  
+  .nav-links {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 16px 0;
+    overflow-y: auto;
+  }
+  
+  .nav-links a, .nav-footer a, .logout-button {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    color: #4a5568;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    margin-bottom: 4px;
+  }
+  
+  .nav-links a:hover, .nav-footer a:hover, .logout-button:hover {
+    background-color: #f7fafc;
+    color: #4299e1;
+  }
+  
+  .nav-links a.active, .nav-footer a.active {
+    background-color: #ebf8ff;
+    color: #3182ce;
+    font-weight: 500;
+    border-left: 3px solid #3182ce;
+  }
+  
+  .nav-icon {
+    margin-right: 12px;
+    font-size: 18px;
+    width: 20px;
+    text-align: center;
+  }
+  
+  .nav-footer {
+    border-top: 1px solid #e2e8f0;
+    padding: 16px 0;
+  }
+  
+  .logout-button {
+    width: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    margin-top: 8px;
+    color: #e53e3e;
+  }
+  
+  .logout-button:hover {
+    background-color: #FFF5F5;
+    color: #C53030;
+  }
+  
+  @media (max-width: 768px) {
+    .side-navbar {
+      width: 72px;
+    }
+    
+    .profile-info, .stat-label, .nav-links a span:not(.nav-icon), 
+    .nav-footer a span:not(.nav-icon), .logout-button span:not(.nav-icon) {
+      display: none;
+    }
+    
+    .nav-links a, .nav-footer a, .logout-button {
+      justify-content: center;
+      padding: 12px 0;
+    }
+    
+    .nav-icon {
+      margin-right: 0;
+      font-size: 20px;
+    }
+    
+    .profile-avatar {
+      width: 40px;
+      height: 40px;
+      font-size: 18px;
+    }
+  }
+  
+  /* Adjustment for the main content container */
+  .leetcode-dashboard, .dashboard-content {
+    margin-left: 240px;
+    padding: 20px;
+  }
+  
+  @media (max-width: 768px) {
+    .leetcode-dashboard, .dashboard-content {
+      margin-left: 72px;
+    }
+  }

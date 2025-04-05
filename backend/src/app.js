@@ -21,6 +21,24 @@ app.use(express.urlencoded({extended:true,limit:"16kb"}))
 app.use(express.static('public'))
 app.use(cookieParser())
 
+app.post('/api/leetcode', async (req, res) => {
+    try {
+        const response = await fetch('https://leetcode.com/graphql', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(req.body)
+        });
+
+        const data = await response.json();
+        res.json(data);
+    } catch (error) {
+        console.error('Error fetching LeetCode API:', error);
+        res.status(500).json({ error: 'Failed to fetch data' });
+    }
+});
+
 // // Apply validation middleware
 // app.use((req, res, next) => {
 //     if (req.method === 'POST' && req.path === '/api/posts') {

@@ -54,11 +54,11 @@ export default function Header() {
           <DropdownMenuContent align="end" side="bottom" sideOffset={5} className="w-48 mt-1">
             <DropdownMenuItem onClick={() => navigate("/dashboard")} className="cursor-pointer text-base">
               <UserCircle className="w-4 h-4 mr-2" />
-              <span>Profile</span>
+              <span> Profile</span>
             </DropdownMenuItem>
             <DropdownMenuItem onClick={() => navigate("/edit-profile")} className="cursor-pointer text-base">
-              <UserCircle className="w-4 h-4 mr-2" />
-              <span>Edit Profile</span>
+            <span>⚙️</span>
+            Settings
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={handleLogout} className="cursor-pointer text-red-500 focus:text-red-500 text-base">
