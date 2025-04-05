@@ -13,6 +13,7 @@ import PostDetail from "./pages/PostDetail";
 import CreatePost from "./pages/CreatePost";
 import EditPost from "./pages/EditPost";
 import PostNavbar from "./pages/PostNavbar";
+import AiInterviewer from "./pages/AiInterviewer";
 
 // Protected route component
 const ProtectedRoute = ({ children }) => {
@@ -72,6 +73,15 @@ function AppRoutes() {
           element={
             <ProtectedRoute>
               <GithubDashboard />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/ai"
+          element={
+            <ProtectedRoute>
+              <AiInterviewer />
             </ProtectedRoute>
           }
         />

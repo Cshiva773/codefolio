@@ -71,6 +71,10 @@ const SideNavbar = ({ user }) => {
           <span className="nav-icon">📊</span>
           <span>Github Stats</span>
         </Link>
+        <Link to="/ai" className={location.pathname === '/ai' ? 'active' : ''}>
+          <span className="nav-icon">🤖</span>
+          <span>AI-Interviewer</span>
+        </Link>
         <Link to="/problems" className={location.pathname === '/problems' ? 'active' : ''}>
           <span className="nav-icon">🧩</span>
           <span>Problems</span>

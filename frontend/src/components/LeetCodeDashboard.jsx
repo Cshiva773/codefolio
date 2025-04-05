@@ -251,7 +251,7 @@ function LeetCodeDashboard() {
     return (
       <div className="leetcode-dashboard loading">
         <div className="loading-spinner"></div>
-        <p>Loading LeetCode stats...</p>
+        <p>Loading stats...</p>
       </div>
     );
   }

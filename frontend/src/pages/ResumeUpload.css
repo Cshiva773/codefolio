@@ -1,0 +1,78 @@
+.resume-upload {
+    background-color: #f7fafc;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .resume-upload h2 {
+    margin-top: 0;
+    color: #2d3748;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .upload-area {
+    border: 2px dashed #cbd5e0;
+    border-radius: 0.5rem;
+    padding: 3rem 1.5rem;
+    text-align: center;
+    transition: all 0.2s;
+    margin-bottom: 1rem;
+  }
+  
+  .upload-area.dragging {
+    border-color: #3182ce;
+    background-color: #ebf8ff;
+  }
+  
+  .file-input {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+  }
+  
+  .file-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #4a5568;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  
+  .file-label svg {
+    fill: #4a5568;
+    margin-bottom: 1rem;
+    width: 48px;
+    height: 48px;
+  }
+  
+  .file-info {
+    text-align: center;
+    color: #718096;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+  }
+  /* Add this to src/components/ResumeUpload.css */
+.upload-status {
+    margin-top: 1rem;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    text-align: center;
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+  
+  .upload-status.success {
+    background-color: #c6f6d5;
+    color: #22543d;
+  }
+  
+  .upload-status.error {
+    background-color: #fed7d7;
+    color: #9b2c2c;
+  }
