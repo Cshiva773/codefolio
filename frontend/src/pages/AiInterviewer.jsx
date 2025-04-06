@@ -7,7 +7,7 @@ import LoadingSpinner from './LoadingSpinner';
 import ResumeInput from './ResumeInput'; // Updated import
 import './InterviewerApp.css';
 import SideNavbar from '@/components/SideNavbar';
-
+import Header from '@/components/Header';
 const AiInterviewer = () => {
   const [step, setStep] = useState('setup'); // setup, interview, summary
   const [threadId, setThreadId] = useState('');
@@ -268,57 +268,60 @@ const AiInterviewer = () => {
   };
 
   return (
-    <div className="app-container">
-      <div className="sidebar">
-        <SideNavbar user={userData}/>
-      </div>
-      <div className="main-content">
-        <div className="interviewer-app">
-          <header>
-            <h1>AI Technical Interviewer</h1>
-          </header>
+    <>
+      <Header />
+      <div className="app-container">
+        <div className="sidebar">
+          <SideNavbar user={userData}/>
+        </div>
+        <div className="main-content">
+          <div className="interviewer-app">
+            <header>
+              <h1>AI Technical Interviewer</h1>
+            </header>
 
-          {error && <div className="error-message">{error}</div>}
+            {error && <div className="error-message">{error}</div>}
 
-          {isLoading && <LoadingSpinner />}
+            {isLoading && <LoadingSpinner />}
 
-          {step === 'setup' && (
-            <div className="setup-container">
-              <JobDescription 
-                jobDescription={jobDescription} 
-                setJobDescription={setJobDescription} 
+            {step === 'setup' && (
+              <div className="setup-container">
+                <JobDescription 
+                  jobDescription={jobDescription} 
+                  setJobDescription={setJobDescription} 
+                />
+                <ResumeInput 
+                  setResumeData={setResumeData} 
+                />
+                <button 
+                  className="start-button" 
+                  onClick={startInterview}
+                  disabled={isLoading}
+                >
+                  Start Interview
+                </button>
+              </div>
+            )}
+
+            {step === 'interview' && (
+              <ChatInterface 
+                messages={messages} 
+                sendMessage={sendMessage} 
+                interviewState={interviewState}
               />
-              <ResumeInput 
-                setResumeData={setResumeData} 
+            )}
+
+            {step === 'summary' && (
+              <InterviewSummary 
+                interviewState={interviewState} 
+                messages={messages}
+                resetInterview={resetInterview} 
               />
-              <button 
-                className="start-button" 
-                onClick={startInterview}
-                disabled={isLoading}
-              >
-                Start Interview
-              </button>
-            </div>
-          )}
-
-          {step === 'interview' && (
-            <ChatInterface 
-              messages={messages} 
-              sendMessage={sendMessage} 
-              interviewState={interviewState}
-            />
-          )}
-
-          {step === 'summary' && (
-            <InterviewSummary 
-              interviewState={interviewState} 
-              messages={messages}
-              resetInterview={resetInterview} 
-            />
-          )}
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
