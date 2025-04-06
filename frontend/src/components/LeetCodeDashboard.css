@@ -1,0 +1,707 @@
+.leetcode-dashboard {
+  font-family: 'Inter', sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  color: #333;
+  background-color: #f9fafb;
+}
+
+/* Header styling */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.username-section h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.ranking {
+  font-size: 14px;
+  color: #666;
+  margin-top: 4px;
+}
+
+.time-frame-selector {
+  display: flex;
+  gap: 12px;
+  background-color: #fff;
+  padding: 8px 12px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.time-frame-selector span {
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.time-frame-selector span.active {
+  background-color: #eef2ff;
+  color: #4f46e5;
+  font-weight: 500;
+}
+
+/* Stats cards */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.stat-card {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.stat-title {
+  color: #666;
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+.stat-value {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 5px;
+  color: #111;
+}
+
+.stat-subtitle {
+  font-size: 13px;
+  color: #666;
+}
+
+/* Loading states */
+.leetcode-dashboard.loading,
+.leetcode-dashboard.error,
+.leetcode-dashboard.no-data {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #4f46e5;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 16px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.error-icon {
+  font-size: 32px;
+  margin-bottom: 16px;
+}
+
+.error-message {
+  color: #e53e3e;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.retry-button, .connect-button {
+  background-color: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.retry-button:hover, .connect-button:hover {
+  background-color: #4338ca;
+}
+
+/* Activity heatmap */
+.section-card {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  margin-bottom: 20px;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #111;
+}
+
+.activity-heatmap {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+.month-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.month-label {
+  text-align: center;
+  font-size: 12px;
+  margin-bottom: 8px;
+  color: #666;
+}
+
+.days-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.day-cell {
+  width: 12px;
+  height: 12px;
+  background-color: #eee;
+  border-radius: 2px;
+  transition: transform 0.1s ease;
+}
+
+.day-cell:hover {
+  transform: scale(1.15);
+}
+
+.day-cell.active.intensity-1 {
+  background-color: #c7e9c0;
+}
+
+.day-cell.active.intensity-2 {
+  background-color: #a1d99b;
+}
+
+.day-cell.active.intensity-3 {
+  background-color: #74c476;
+}
+
+.day-cell.active.intensity-4 {
+  background-color: #31a354;
+}
+
+.heatmap-legend {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  font-size: 12px;
+  color: #666;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+}
+
+.legend-square {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 4px;
+  border-radius: 2px;
+}
+
+.legend-square.intensity-0 {
+  background-color: #eee;
+}
+
+.legend-square.intensity-1 {
+  background-color: #c7e9c0;
+}
+
+.legend-square.intensity-2 {
+  background-color: #a1d99b;
+}
+
+.legend-square.intensity-3 {
+  background-color: #74c476;
+}
+
+.legend-square.intensity-4 {
+  background-color: #31a354;
+}
+
+/* Dashboard Body */
+.dashboard-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.dashboard-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Problem breakdown chart */
+.problems-chart {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 16px;
+}
+
+.donut-chart {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  flex-shrink: 0;
+}
+
+.donut-slice {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  top: 0;
+  left: 0;
+}
+
+.donut-slice.easy {
+  background-color: #60a5fa;
+}
+
+.donut-slice.medium {
+  background-color: #f59e0b;
+}
+
+.donut-slice.hard {
+  background-color: #ef4444;
+}
+
+.donut-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border-radius: 50%;
+  width: 70%;
+  height: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.problem-stats {
+  flex-grow: 1;
+}
+
+.problem-type {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.problem-label {
+  width: 70px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+}
+
+.problem-label::before {
+  content: "";
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  margin-right: 8px;
+}
+
+.problem-type.easy .problem-label::before {
+  background-color: #60a5fa;
+}
+
+.problem-type.medium .problem-label::before {
+  background-color: #f59e0b;
+}
+
+.problem-type.hard .problem-label::before {
+  background-color: #ef4444;
+}
+
+.problem-progress {
+  flex-grow: 1;
+  height: 8px;
+  background-color: #f3f4f6;
+  border-radius: 4px;
+  margin: 0 12px;
+  overflow: hidden;
+}
+
+.problem-progress .progress-bar {
+  height: 100%;
+  border-radius: 4px;
+}
+
+.problem-type.easy .progress-bar {
+  background-color: #60a5fa;
+}
+
+.problem-type.medium .progress-bar {
+    background-color: #f59e0b;
+  }
+  
+  .problem-type.hard .progress-bar {
+    background-color: #ef4444;
+  }
+  
+  .problem-count {
+    font-size: 14px;
+    font-weight: 600;
+    min-width: 70px;
+    text-align: right;
+  }
+  
+  /* Contribution section */
+  .contribution-section {
+    display: flex;
+    gap: 24px;
+  }
+  
+  .contribution-item {
+    background-color: #f9fafb;
+    border-radius: 8px;
+    padding: 16px;
+    flex: 1;
+    text-align: center;
+  }
+  
+  .contribution-label {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 8px;
+  }
+  
+  .contribution-value {
+    font-size: 32px;
+    font-weight: 700;
+    color: #111;
+  }
+  
+  /* Recent activity */
+  .recent-activity {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .activity-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border-radius: 8px;
+    background-color: #f9fafb;
+    transition: transform 0.2s;
+  }
+  
+  .activity-item:hover {
+    transform: translateX(4px);
+  }
+  
+  .activity-status {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 4px;
+    min-width: 90px;
+    text-align: center;
+  }
+  
+  .activity-status.accepted {
+    background-color: #dcfce7;
+    color: #166534;
+  }
+  
+  .activity-status.wrong-answer {
+    background-color: #fee2e2;
+    color: #b91c1c;
+  }
+  
+  .activity-status.time-limit-exceeded {
+    background-color: #fff1f2;
+    color: #be123c;
+  }
+  
+  .activity-status.runtime-error {
+    background-color: #fef3c7;
+    color: #92400e;
+  }
+  
+  .activity-details {
+    flex-grow: 1;
+  }
+  
+  .activity-title {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+  
+  .activity-date {
+    font-size: 12px;
+    color: #666;
+  }
+  
+  /* Recommendations section */
+  .recommendations-card {
+    height: calc(100% - 40px);
+  }
+  
+  .recommendations {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .recommendation-item {
+    display: flex;
+    gap: 16px;
+    padding: 16px;
+    border-radius: 8px;
+    background-color: #f9fafb;
+    border-left: 4px solid transparent;
+    transition: transform 0.2s;
+  }
+  
+  .recommendation-item:hover {
+    transform: translateY(-4px);
+  }
+  
+  .recommendation-item .easy {
+    border-left-color: #60a5fa;
+  }
+  
+  .recommendation-item .medium {
+    border-left-color: #f59e0b;
+  }
+  
+  .recommendation-item .hard {
+    border-left-color: #ef4444;
+  }
+  
+  .recommendation-item .streak {
+    border-left-color: #8b5cf6;
+  }
+  
+  .recommendation-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 18px;
+  }
+  
+  .recommendation-icon.easy {
+    background-color: #dbeafe;
+    color: #2563eb;
+  }
+  
+  .recommendation-icon.medium {
+    background-color: #fef3c7;
+    color: #d97706;
+  }
+  
+  .recommendation-icon.hard {
+    background-color: #fee2e2;
+    color: #dc2626;
+  }
+  
+  .recommendation-icon.streak {
+    background-color: #ede9fe;
+    color: #7c3aed;
+  }
+  
+  .recommendation-text {
+    flex-grow: 1;
+  }
+  
+  .recommendation-title {
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  
+  .recommendation-description {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.4;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 1024px) {
+    .stats-row {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .dashboard-body {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .dashboard-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    
+    .time-frame-selector {
+      width: 100%;
+      justify-content: space-between;
+    }
+    
+    .stats-row {
+      grid-template-columns: 1fr;
+    }
+    
+    .problems-chart {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .contribution-section {
+      flex-direction: column;
+    }
+  }
+  .contest-history-card {
+    margin-bottom: 20px;
+  }
+  
+  .contest-history-chart {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+  
+  .contest-tooltip {
+    background-color: rgba(255, 255, 255, 0.95);
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  }
+  
+  .contest-tooltip p {
+    margin: 0;
+    padding: 2px 0;
+    font-size: 14px;
+  }
+  
+  .contest-tooltip .contest-name {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 4px;
+  }
+  
+  .contest-tooltip .contest-rating {
+    color: #8884d8;
+  }
+  
+  .contest-stats {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .contest-stat-item {
+    text-align: center;
+    padding: 10px 15px;
+    background-color: #f8f9fa;
+    border-radius: 6px;
+    min-width: 100px;
+  }
+  
+  .contest-stat-item .stat-label {
+    font-size: 14px;
+    color: #6c757d;
+    margin-bottom: 5px;
+  }
+  
+  .contest-stat-item .stat-value {
+    font-size: 18px;
+    font-weight: bold;
+    color: #343a40;
+  }
+  
+  .contest-history-loading,
+  .contest-history-error,
+  .contest-history-empty {
+    padding: 20px;
+    text-align: center;
+    background-color: #ffffff;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  
+  .contest-history-error {
+    color: #dc3545;
+  }
+  .dashboard-layout {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f7fafc;
+  }
+  
+  /* Add this to your LeetCodeDashboard.css file */
+  .leetcode-dashboard {
+    flex: 1;
+    margin-left: 240px; /* Match the width of the sidebar */
+    padding: 20px;
+    overflow-x: hidden;
+  }
+  
+  @media (max-width: 768px) {
+    .leetcode-dashboard {
+      margin-left: 72px; /* Match the collapsed width of the sidebar */
+    }
+  }
+  
+  /* Adjust your existing styles as needed to accommodate the sidebar */
+  .stats-row, .section-card, .dashboard-body {
+    /* Keep your existing styles */
+    /* Just make sure they don't use positioning that conflicts with the sidebar */
+  }

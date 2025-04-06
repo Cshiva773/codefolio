@@ -31,7 +31,6 @@ const userSchema = new mongoose.Schema({
     },
     fullName: {
       type: String,
-      required: true,
       trim: true
     },
     profileInfo: {
@@ -45,14 +44,9 @@ const userSchema = new mongoose.Schema({
     socialLinks: {
       portfolio: String,
       linkedin: String,
-      leetcode: {
-        username: String,
-        profile: String
-      },
-      github: {
-        username: String,
-        profile: String
-      },
+      leetcode: String,
+      codeforces: String,
+      github: String,
       resume: String
     },
     energyPoints: {
@@ -95,7 +89,10 @@ const userSchema = new mongoose.Schema({
       publicProfile: { type: Boolean, default: true },
       theme: { type: String, default: 'light' },
       language: { type: String, default: 'en' }
-    }
+    },
+    refreshToken:{
+      type:String,
+  },
   }, { timestamps: true });
   
   userSchema.pre('save', async function(next) {
