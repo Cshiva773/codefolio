@@ -15,6 +15,7 @@ import EditPost from "./pages/EditPost";
 import PostNavbar from "./pages/PostNavbar";
 import AiInterviewer from "./pages/AiInterviewer";
 import UpdateProfilePage from "./pages/UpdateProfilePage";
+import ProblemSheet from "./pages/ProblemSheet";
 
 // Protected route component
 const ProtectedRoute = ({ children }) => {
@@ -95,6 +96,15 @@ function AppRoutes() {
             </ProtectedRoute>
           }
         />
+
+        <Route
+          path="/problems"
+          element={
+            <ProtectedRoute>
+              <ProblemSheet />
+            </ProtectedRoute>
+          }
+          />
 
         <Route
           path="/community"

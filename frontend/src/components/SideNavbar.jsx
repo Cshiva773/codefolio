@@ -90,7 +90,7 @@ const SideNavbar = ({ user }) => {
         </Link>
         <Link to="/problems" className={location.pathname === '/problems' ? 'active' : ''}>
           <span className="nav-icon">🧩</span>
-          <span>Problems</span>
+          <span>Problem Vault</span>
         </Link>
         <Link to="/community" className={location.pathname === '/community' ? 'active' : ''}>
           <span className="nav-icon">👥</span>
