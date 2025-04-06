@@ -1,0 +1,282 @@
+/* LeetcodeSheet.css */
+
+.leetcode-sheet {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    color: #333;
+  }
+  
+  .header {
+    margin-bottom: 30px;
+  }
+  
+  .header h1 {
+    color: #2a3990;
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+  }
+  
+  .header p {
+    color: #666;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+  }
+  
+  .controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .filters {
+    display: flex;
+    gap: 15px;
+  }
+  
+  .filter-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .filter-group label {
+    font-weight: 600;
+  }
+  
+  .filter-group select {
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background-color: white;
+    font-size: 0.9rem;
+  }
+  
+  .add-btn {
+    background-color: #2a3990;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-left: 12px; /* add space on the left */
+  }
+  
+  
+  .add-btn:hover {
+    background-color: #1e2770;
+  }
+  
+  /* Question Form */
+  .question-form {
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    border: 1px solid #ddd;
+  }
+  
+  .question-form h2 {
+    color: #2a3990;
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+  }
+  
+  .form-group input,
+  .form-group select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+  }
+  
+  .submit-btn {
+    background-color: #2a3990;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 10px;
+  }
+  
+  .submit-btn:hover {
+    background-color: #1e2770;
+  }
+  
+  /* Question Table */
+  .question-table {
+    overflow-x: auto;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  thead {
+    background-color: #2a3990;
+    color: white;
+  }
+  
+  th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  th {
+    font-weight: 600;
+  }
+  
+  tbody tr:hover {
+    background-color: #f5f7ff;
+  }
+  
+  td.title {
+    font-weight: 600;
+    color: #2a3990;
+  }
+  
+  td.difficulty {
+    font-weight: 600;
+  }
+  
+  td.difficulty.easy {
+    color: #00a152;
+  }
+  
+  td.difficulty.medium {
+    color: #ff8c00;
+  }
+  
+  td.difficulty.hard {
+    color: #d32f2f;
+  }
+  
+  .links {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .problem-link, .solution-link {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+  
+  .problem-link {
+    background-color: #e3f2fd;
+    color: #1565c0;
+  }
+  
+  .solution-link {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+  }
+  
+  .problem-link:hover {
+    background-color: #bbdefb;
+  }
+  
+  .solution-link:hover {
+    background-color: #c8e6c9;
+  }
+  
+  .actions {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .edit-btn, .delete-btn {
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+  
+  .edit-btn {
+    background-color: #e3f2fd;
+    color: #1565c0;
+  }
+  
+  .delete-btn {
+    background-color: #ffebee;
+    color: #c62828;
+  }
+  
+  .edit-btn:hover {
+    background-color: #bbdefb;
+  }
+  
+  .delete-btn:hover {
+    background-color: #ffcdd2;
+  }
+  
+  tr.completed {
+    background-color: #f5f5f5;
+    opacity: 0.7;
+  }
+  
+  tr.completed td.title {
+    text-decoration: line-through;
+    color: #666;
+  }
+  
+  @media (max-width: 768px) {
+    .controls {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 15px;
+    }
+    
+    .filters {
+      width: 100%;
+      flex-direction: column;
+    }
+    
+    .filter-group {
+      width: 100%;
+    }
+    
+    .filter-group select {
+      flex-grow: 1;
+    }
+    
+    .add-btn {
+      width: 100%;
+    }
+    
+    table {
+      font-size: 0.9rem;
+    }
+    
+    th, td {
+      padding: 8px 10px;
+    }
+    
+    .actions {
+      flex-direction: column;
+    }
+  }
