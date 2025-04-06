@@ -17,9 +17,22 @@ const SideNavbar = ({ user }) => {
   return (
     <div className="side-navbar">
       <div className="nav-profile">
-        <div className="profile-avatar">
-          {user?.fullName?.charAt(0) || user?.username?.charAt(0) || '👤'}
-        </div>
+      <div className="profile-wrapper">
+  {user?.profileInfo?.profilePicture ? (
+    <img
+      src={user.profileInfo.profilePicture}
+      alt="Profile"
+      className="profile-image"
+    />
+  ) : (
+    <div className="profile-avatar">
+      {user?.fullName?.charAt(0).toUpperCase() ||
+       user?.username?.charAt(0).toUpperCase() ||
+       "👤"}
+    </div>
+  )}
+</div>
+
         <div className="profile-info">
           <h3>{user?.fullName || user?.username || 'User'}</h3>
           <p className="stat-value">@{user?.username}</p>

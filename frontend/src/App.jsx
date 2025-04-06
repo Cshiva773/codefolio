@@ -14,6 +14,7 @@ import CreatePost from "./pages/CreatePost";
 import EditPost from "./pages/EditPost";
 import PostNavbar from "./pages/PostNavbar";
 import AiInterviewer from "./pages/AiInterviewer";
+import UpdateProfilePage from "./pages/UpdateProfilePage";
 
 // Protected route component
 const ProtectedRoute = ({ children }) => {
@@ -82,6 +83,15 @@ function AppRoutes() {
           element={
             <ProtectedRoute>
               <AiInterviewer />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/settings"
+          element={
+            <ProtectedRoute>
+              <UpdateProfilePage />
             </ProtectedRoute>
           }
         />
