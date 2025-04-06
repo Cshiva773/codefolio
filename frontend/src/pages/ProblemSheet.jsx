@@ -3,6 +3,7 @@ import './LeetcodeSheet.css';
 import SideNavbar from '@/components/SideNavbar';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
+import Header from '@/components/Header';
 
 // Custom hook for localStorage persistence
 function useLocalStorage(key, initialValue) {
@@ -179,179 +180,182 @@ const ProblemSheet = () => {
   const difficulties = ['All', 'Easy', 'Medium', 'Hard'];
 
   return (
-    <div className='flex flex-col h-screen'>
-        <SideNavbar user={userData} />
-        <div className="leetcode-sheet">
-        <div className="header">
-            <h1>Personal Coding Problem List</h1>
-            <p>Track, add, and manage problems from any platform — LeetCode, Codeforces, CodeChef, and beyond.</p>
-            <div className="controls">
-            <div className="filters">
-                <div className="filter-group">
-                <label>Topic:</label>
-                <select 
-                    value={filter.topic} 
-                    onChange={(e) => setFilter({...filter, topic: e.target.value})}
-                >
-                    {topics.map(topic => (
-                    <option key={topic} value={topic}>{topic}</option>
-                    ))}
-                </select>
-                </div>
-                <div className="filter-group">
-                <label>Difficulty:</label>
-                <select 
-                    value={filter.difficulty} 
-                    onChange={(e) => setFilter({...filter, difficulty: e.target.value})}
-                >
-                    {difficulties.map(diff => (
-                    <option key={diff} value={diff}>{diff}</option>
-                    ))}
-                </select>
-                </div>
-            </div>
-            <button 
-                className="add-btn" 
-                onClick={() => {
-                setNewQuestion({
-                    id: '',
-                    title: '',
-                    difficulty: 'Easy',
-                    topic: 'Array',
-                    link: '',
-                    solution: '',
-                    completed: false
-                });
-                setEditingId(null);
-                setShowForm(!showForm);
-                }}
-            >
-                {showForm ? 'Cancel' : 'Add Question'}
-            </button>
-            </div>
-        </div>
+    <>
+      <Header />
+      <div className='flex flex-col h-screen'>
+          <SideNavbar user={userData} />
+          <div className="leetcode-sheet">
+          <div className="header">
+              <h1>Personal Coding Problem List</h1>
+              <p>Track, add, and manage problems from any platform — LeetCode, Codeforces, CodeChef, and beyond.</p>
+              <div className="controls">
+              <div className="filters">
+                  <div className="filter-group">
+                  <label>Topic:</label>
+                  <select 
+                      value={filter.topic} 
+                      onChange={(e) => setFilter({...filter, topic: e.target.value})}
+                  >
+                      {topics.map(topic => (
+                      <option key={topic} value={topic}>{topic}</option>
+                      ))}
+                  </select>
+                  </div>
+                  <div className="filter-group">
+                  <label>Difficulty:</label>
+                  <select 
+                      value={filter.difficulty} 
+                      onChange={(e) => setFilter({...filter, difficulty: e.target.value})}
+                  >
+                      {difficulties.map(diff => (
+                      <option key={diff} value={diff}>{diff}</option>
+                      ))}
+                  </select>
+                  </div>
+              </div>
+              <button 
+                  className="add-btn" 
+                  onClick={() => {
+                  setNewQuestion({
+                      id: '',
+                      title: '',
+                      difficulty: 'Easy',
+                      topic: 'Array',
+                      link: '',
+                      solution: '',
+                      completed: false
+                  });
+                  setEditingId(null);
+                  setShowForm(!showForm);
+                  }}
+              >
+                  {showForm ? 'Cancel' : 'Add Question'}
+              </button>
+              </div>
+          </div>
 
-        {showForm && (
-            <div className="question-form">
-            <h2>{editingId ? 'Edit Question' : 'Add New Question'}</h2>
-            <form onSubmit={addQuestion}>
-                <div className="form-group">
-                <label>Title:</label>
-                <input
-                    type="text"
-                    name="title"
-                    value={newQuestion.title}
-                    onChange={handleInputChange}
-                    required
-                />
-                </div>
-                <div className="form-group">
-                <label>Difficulty:</label>
-                <select
-                    name="difficulty"
-                    value={newQuestion.difficulty}
-                    onChange={handleInputChange}
-                >
-                    <option value="Easy">Easy</option>
-                    <option value="Medium">Medium</option>
-                    <option value="Hard">Hard</option>
-                </select>
-                </div>
-                <div className="form-group">
-                <label>Topic:</label>
-                <select
-                    name="topic"
-                    value={newQuestion.topic}
-                    onChange={handleInputChange}
-                >
-                    {topics.slice(1).map(topic => (
-                    <option key={topic} value={topic}>{topic}</option>
-                    ))}
-                </select>
-                </div>
-                <div className="form-group">
-                <label>Problem Link:</label>
-                <input
-                    type="url"
-                    name="link"
-                    value={newQuestion.link}
-                    onChange={handleInputChange}
-                    required
-                />
-                </div>
-                <div className="form-group">
-                <label>Solution Link:</label>
-                <input
-                    type="url"
-                    name="solution"
-                    value={newQuestion.solution}
-                    onChange={handleInputChange}
-                />
-                </div>
-                <button type="submit" className="submit-btn">
-                {editingId ? 'Update Question' : 'Add Question'}
-                </button>
-            </form>
-            </div>
-        )}
+          {showForm && (
+              <div className="question-form">
+              <h2>{editingId ? 'Edit Question' : 'Add New Question'}</h2>
+              <form onSubmit={addQuestion}>
+                  <div className="form-group">
+                  <label>Title:</label>
+                  <input
+                      type="text"
+                      name="title"
+                      value={newQuestion.title}
+                      onChange={handleInputChange}
+                      required
+                  />
+                  </div>
+                  <div className="form-group">
+                  <label>Difficulty:</label>
+                  <select
+                      name="difficulty"
+                      value={newQuestion.difficulty}
+                      onChange={handleInputChange}
+                  >
+                      <option value="Easy">Easy</option>
+                      <option value="Medium">Medium</option>
+                      <option value="Hard">Hard</option>
+                  </select>
+                  </div>
+                  <div className="form-group">
+                  <label>Topic:</label>
+                  <select
+                      name="topic"
+                      value={newQuestion.topic}
+                      onChange={handleInputChange}
+                  >
+                      {topics.slice(1).map(topic => (
+                      <option key={topic} value={topic}>{topic}</option>
+                      ))}
+                  </select>
+                  </div>
+                  <div className="form-group">
+                  <label>Problem Link:</label>
+                  <input
+                      type="url"
+                      name="link"
+                      value={newQuestion.link}
+                      onChange={handleInputChange}
+                      required
+                  />
+                  </div>
+                  <div className="form-group">
+                  <label>Solution Link:</label>
+                  <input
+                      type="url"
+                      name="solution"
+                      value={newQuestion.solution}
+                      onChange={handleInputChange}
+                  />
+                  </div>
+                  <button type="submit" className="submit-btn">
+                  {editingId ? 'Update Question' : 'Add Question'}
+                  </button>
+              </form>
+              </div>
+          )}
 
-        <div className="question-table">
-            <table>
-            <thead>
-                <tr>
-                <th>Status</th>
-                <th>Title</th>
-                <th>Difficulty</th>
-                <th>Topic</th>
-                <th>Links</th>
-                </tr>
-            </thead>
-            <tbody>
-                {filteredQuestions.map(question => (
-                <tr key={question.id} className={question.completed ? 'completed' : ''}>
-                    <td>
-                    <input
-                        type="checkbox"
-                        checked={question.completed}
-                        onChange={() => toggleCompleted(question.id)}
-                    />
-                    </td>
-                    <td className="title">{question.title}</td>
-                    <td className={`difficulty ${question.difficulty.toLowerCase()}`}>
-                    {question.difficulty}
-                    </td>
-                    <td>{question.topic}</td>
-                    <td className="links">
-                    <a href={question.link} target="_blank" rel="noopener noreferrer" className="problem-link">
-                        Problem
-                    </a>
-                    {question.solution && (
-                        <a href={question.solution} target="_blank" rel="noopener noreferrer" className="solution-link">
-                        Solution
-                        </a>
-                    )}
-                    </td>
-                    <td className="actions">
-                    <button 
-                        className="edit-btn" 
-                        onClick={() => editQuestion(question.id)}
-                    >
-                        Edit
-                    </button>
-                    <button 
-                        className="delete-btn" 
-                        onClick={() => deleteQuestion(question.id)}
-                    >
-                        Delete
-                    </button>
-                    </td>
-                </tr>
-                ))}
-            </tbody>
-            </table>
-        </div>
-        </div>
-    </div>
+          <div className="question-table">
+              <table>
+              <thead>
+                  <tr>
+                  <th>Status</th>
+                  <th>Title</th>
+                  <th>Difficulty</th>
+                  <th>Topic</th>
+                  <th>Links</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  {filteredQuestions.map(question => (
+                  <tr key={question.id} className={question.completed ? 'completed' : ''}>
+                      <td>
+                      <input
+                          type="checkbox"
+                          checked={question.completed}
+                          onChange={() => toggleCompleted(question.id)}
+                      />
+                      </td>
+                      <td className="title">{question.title}</td>
+                      <td className={`difficulty ${question.difficulty.toLowerCase()}`}>
+                      {question.difficulty}
+                      </td>
+                      <td>{question.topic}</td>
+                      <td className="links">
+                      <a href={question.link} target="_blank" rel="noopener noreferrer" className="problem-link">
+                          Problem
+                      </a>
+                      {question.solution && (
+                          <a href={question.solution} target="_blank" rel="noopener noreferrer" className="solution-link">
+                          Solution
+                          </a>
+                      )}
+                      </td>
+                      <td className="actions">
+                      <button 
+                          className="edit-btn" 
+                          onClick={() => editQuestion(question.id)}
+                      >
+                          Edit
+                      </button>
+                      <button 
+                          className="delete-btn" 
+                          onClick={() => deleteQuestion(question.id)}
+                      >
+                          Delete
+                      </button>
+                      </td>
+                  </tr>
+                  ))}
+              </tbody>
+              </table>
+          </div>
+          </div>
+      </div>
+    </>
   );
 };
 

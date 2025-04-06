@@ -1,148 +1,281 @@
-import React, { useState, useEffect } from 'react';
-import PostCard from './PostCard';
-import PostFilter from './PostFilter';
+"use client"
+
+import { useState, useEffect } from "react"
+import CreatePost from "../components/discussion/CreatePost"
+import PostList from "../components/discussion/PostList"
+import FilterBar from "../components/discussion/FilterBar"
+import SearchBar from "../components/discussion/SearchBar"
+import "./discussion-forum.css"
+import SideNavbar from "@/components/SideNavbar"
+import Header from "@/components/Header"
+
+// Define your API base URL here
+const API_BASE_URL = "/api" // Change this to match your backend URL (e.g., 'http://localhost:5000/api')
 
 const DiscussionForum = () => {
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
+  const [posts, setPosts] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+  const [showCreatePost, setShowCreatePost] = useState(false)
+  const [companies, setCompanies] = useState([])
+  const [industries, setIndustries] = useState([])
+  const [userData, setUserData] = useState(null);
   const [filters, setFilters] = useState({
-    company: '',
-    role: '',
-    postType: '',
-    domain: '',
-    sortBy: 'recent',
-    searchTerm: ''
-  });
+    sort: "most-recent",
+    postType: "all",
+    company: "all",
+    role: "all",
+    domain: "all",
+    search: "",
+  })
 
   useEffect(() => {
-    fetchPosts();
-  }, [currentPage, filters]);
-
-  const fetchPosts = async () => {
-    setLoading(true);
+      const fetchUserProfile = async () => {
+        const authToken = localStorage.getItem("authToken");
     
+        if (!authToken) {
+          setError("Authentication token is missing");
+          setLoading(false);
+          return;
+        }
+    
+        try {
+          const response = await fetch("http://localhost:3000/api/user/profile", {
+            method: 'GET',
+            credentials: 'include',
+            headers: {
+              "Authorization": `Bearer ${authToken}`,
+              "Content-Type": "application/json"
+            },
+          });
+    
+          if (!response.ok) {
+            throw new Error("Failed to fetch user profile");
+          }
+    
+          const data = await response.json();
+    
+          // Check for GitHub username
+          if (data && data.user) {
+            setUserData(data.user);
+          }
+    
+        } catch (error) {
+          console.error("Error fetching user profile:", error);
+          setError("Failed to fetch user profile");
+        } finally {
+          setLoading(false);
+        }
+      };
+    
+      fetchUserProfile();
+    }, []);
+  const [pagination, setPagination] = useState({
+    currentPage: 1,
+    totalPages: 1,
+    totalPosts: 0,
+  })
+
+  // Helper function to make API requests
+  const apiRequest = async (endpoint, options = {}) => {
     try {
-      // Build query parameters from filters
-      const queryParams = new URLSearchParams({
-        page: currentPage,
-        limit: 10
-      });
-      
-      if (filters.company) queryParams.append('company', filters.company);
-      if (filters.role) queryParams.append('role', filters.role);
-      if (filters.postType) queryParams.append('postType', filters.postType);
-      if (filters.domain) queryParams.append('domain', filters.domain);
-      if (filters.searchTerm) queryParams.append('search', filters.searchTerm);
-      
-      // Set sort parameter based on sortBy value
-      if (filters.sortBy === 'recent') {
-        queryParams.append('sort', '-createdAt');
-      } else if (filters.sortBy === 'popular') {
-        queryParams.append('sort', '-views');
-      } else if (filters.sortBy === 'comments') {
-        queryParams.append('sort', '-commentCount');
-      } else if (filters.sortBy === 'votes') {
-        queryParams.append('sort', '-voteCount');
-      }
-      
-      const response = await fetch(`http://localhost:3000/api/posts/filter?${queryParams}`);
-      
+      const url = `${API_BASE_URL}${endpoint}`
+      console.log(`Making API request to: ${url}`)
+
+      const response = await fetch(url, options)
+
+      // Check if response is ok before parsing JSON
       if (!response.ok) {
-        throw new Error('Failed to fetch posts');
+        const errorText = await response.text()
+        console.error(`API Error (${response.status}):`, errorText)
+        throw new Error(`API Error: ${response.status} ${response.statusText}`)
       }
-      
-      const data = await response.json();
-      
-      setPosts(data.data || []);
-      setTotalPages(data.pagination ? data.pagination.totalPages : 1);
-      setLoading(false);
-    } catch (error) {
-      console.error('Error fetching posts:', error);
-      setError('Failed to load posts. Please try again later.');
-      setLoading(false);
+
+      const data = await response.json()
+      return { success: true, data }
+    } catch (err) {
+      console.error("API Request Error:", err)
+      return { success: false, error: err.message }
     }
-  };
+  }
+
+  // Fetch posts based on filters
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        setLoading(true)
+        const queryParams = new URLSearchParams({
+          sort: filters.sort,
+          page: pagination.currentPage.toString(),
+          limit: "10",
+        })
+
+        if (filters.postType !== "all") queryParams.append("postType", filters.postType)
+        if (filters.company !== "all") queryParams.append("company", filters.company)
+        if (filters.role !== "all") queryParams.append("role", filters.role)
+        if (filters.domain !== "all") queryParams.append("domain", filters.domain)
+        if (filters.search) queryParams.append("search", filters.search)
+
+        const result = await apiRequest(`/posts/filter?${queryParams}`)
+
+        if (!result.success) {
+          throw new Error(result.error)
+        }
+
+        setPosts(result.data.data || [])
+        setPagination({
+          currentPage: Number.parseInt(result.data.currentPage) || 1,
+          totalPages: Number.parseInt(result.data.totalPages) || 1,
+          totalPosts: Number.parseInt(result.data.totalPosts) || 0,
+        })
+      } catch (err) {
+        setError(err.message)
+        console.error("Error fetching posts:", err)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchPosts()
+  }, [filters, pagination.currentPage])
+
+  // Fetch companies and industries on component mount
+  useEffect(() => {
+    const fetchCompaniesAndIndustries = async () => {
+      try {
+        const [companiesResult, industriesResult] = await Promise.all([
+          apiRequest("/companies"),
+          apiRequest("/industries"),
+        ])
+
+        if (!companiesResult.success) {
+          console.error("Failed to fetch companies:", companiesResult.error)
+        } else {
+          setCompanies(companiesResult.data.data || [])
+        }
+
+        if (!industriesResult.success) {
+          console.error("Failed to fetch industries:", industriesResult.error)
+        } else {
+          setIndustries(industriesResult.data.data || [])
+        }
+      } catch (err) {
+        console.error("Error fetching initial data:", err)
+      }
+    }
+
+    fetchCompaniesAndIndustries()
+  }, [])
 
   const handleFilterChange = (newFilters) => {
-    setFilters(newFilters);
-    setCurrentPage(1); // Reset to first page when filters change
-  };
+    setFilters({ ...filters, ...newFilters })
+    setPagination((prev) => ({ ...prev, currentPage: 1 })) // Reset to first page on filter change
+  }
+
+  const handleSearch = (searchTerm) => {
+    setFilters((prev) => ({ ...prev, search: searchTerm }))
+    setPagination((prev) => ({ ...prev, currentPage: 1 }))
+  }
 
   const handlePageChange = (newPage) => {
-    setCurrentPage(newPage);
-    window.scrollTo(0, 0);
-  };
+    setPagination((prev) => ({ ...prev, currentPage: newPage }))
+  }
+
+  const handlePostCreated = (newPost) => {
+    setPosts((prevPosts) => [newPost, ...prevPosts])
+    setShowCreatePost(false)
+  }
+
+  const handlePostInteraction = async (postId, action, data = {}) => {
+    try {
+      const result = await apiRequest(`/posts/${postId}/${action}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+
+      if (!result.success) {
+        throw new Error(result.error)
+      }
+
+      // Update the post in the local state
+      setPosts((prevPosts) => prevPosts.map((post) => (post._id === postId ? { ...post, ...data.updateData } : post)))
+
+      return result.data
+    } catch (err) {
+      console.error(`Error during ${action}:`, err)
+      throw err
+    }
+  }
 
   return (
-    <div className="home-page">
-      <div className="container">
-        <div className="page-header">
-          <h1>Discussion Forum</h1>
-          <p>Share your experiences, ask questions, and connect with others</p>
-        </div>
-        
-        <div className="content-grid">
-          <aside className="sidebar">
-            <PostFilter onFilter={handleFilterChange} />
-          </aside>
-          
-          <div className="main-feed">
-            {loading ? (
-              <div className="loading">Loading posts...</div>
-            ) : error ? (
-              <div className="error">{error}</div>
-            ) : posts.length === 0 ? (
-              <div className="no-posts">
-                <h3>No posts found</h3>
-                <p>Try adjusting your filters or create a new post</p>
-              </div>
-            ) : (
-              <div className="posts-list">
-                {posts.map(post => (
-                  <PostCard key={post._id} post={post} />
-                ))}
-              </div>
-            )}
-            
-            {!loading && totalPages > 1 && (
-              <div className="pagination">
-                <button 
-                  onClick={() => handlePageChange(currentPage - 1)}
-                  disabled={currentPage === 1}
-                  className="page-btn prev"
-                >
-                  Previous
-                </button>
-                
-                <div className="page-numbers">
-                  {[...Array(totalPages).keys()].map(number => (
-                    <button
-                      key={number + 1}
-                      onClick={() => handlePageChange(number + 1)}
-                      className={`page-number ${currentPage === number + 1 ? 'active' : ''}`}
-                    >
-                      {number + 1}
-                    </button>
-                  ))}
-                </div>
-                
-                <button 
-                  onClick={() => handlePageChange(currentPage + 1)}
-                  disabled={currentPage === totalPages}
-                  className="page-btn next"
-                >
-                  Next
-                </button>
-              </div>
-            )}
+    <>
+      <Header />
+      <div className='flex flex-col h-screen'>
+        <SideNavbar user={userData}/>
+        <div className="discussion-forum">
+          <div className="discussion-forum-header">
+            <h1>Discussion Forum</h1>
+            <button className="create-post-btn" onClick={() => setShowCreatePost(true)}>
+              Create New Post
+            </button>
           </div>
+
+          <div className="discussion-forum-controls">
+            <SearchBar onSearch={handleSearch} />
+            <FilterBar
+              filters={filters}
+              onFilterChange={handleFilterChange}
+              companies={companies}
+              industries={industries}
+            />
+          </div>
+
+          {loading && <div className="loading-spinner">Loading posts...</div>}
+
+          {error && (
+            <div className="error-message">
+              <h3>Error loading posts</h3>
+              <p>{error}</p>
+              <button
+                onClick={() => {
+                  setError(null)
+                  setPagination((prev) => ({ ...prev, currentPage: 1 }))
+                }}
+                className="retry-btn"
+              >
+                Retry
+              </button>
+            </div>
+          )}
+
+          {!loading && !error && (
+            <PostList
+              posts={posts}
+              onInteraction={handlePostInteraction}
+              pagination={pagination}
+              onPageChange={handlePageChange}
+            />
+          )}
+
+          {showCreatePost && (
+            <div className="modal-overlay">
+              <CreatePost
+                onClose={() => setShowCreatePost(false)}
+                onPostCreated={handlePostCreated}
+                companies={companies}
+                industries={industries}
+                apiRequest={apiRequest}
+              />
+            </div>
+          )}
         </div>
       </div>
-    </div>
-  );
-};
+    </>
+  )
+}
 
-export default DiscussionForum;
+export default DiscussionForum
+

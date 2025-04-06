@@ -110,27 +110,7 @@ function AppRoutes() {
           path="/community"
           element={
             <ProtectedRoute>
-              <div className="app-container">
-                <PostNavbar />
-                <main className="main-content">
-                  <Routes>
-                    <Route path="/community" element={<DiscussionForum />} />
-                    <Route path="/community/post/:id" element={<PostDetail />} />
-                    <Route path="/community/create-post" element={
-                      <ProtectedRoute>
-                        <CreatePost />
-                      </ProtectedRoute>
-                    } />
-                    <Route path="/edit-post/:id" element={
-                      <ProtectedRoute>
-                        <EditPost />
-                      </ProtectedRoute>
-                    } />
-
-                  </Routes>
-                </main>
-              </div>
-              <div>Community Page</div>
+              <DiscussionForum />
             </ProtectedRoute>
           }
         />
