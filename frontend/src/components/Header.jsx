@@ -48,12 +48,12 @@ export default function Header() {
           <DropdownMenuTrigger className="outline-none">
             <Avatar className="w-10 h-10 cursor-pointer hover:ring-2 hover:ring-gray-200 transition-all">
               <AvatarImage src="/profile.jpg" alt="Profile" />
-              <AvatarFallback>US</AvatarFallback>
+              <AvatarFallback><UserCircle className="w-4 h-4 mr-2" /></AvatarFallback>
             </Avatar>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" side="bottom" sideOffset={5} className="w-48 mt-1">
             <DropdownMenuItem onClick={() => navigate("/dashboard")} className="cursor-pointer text-base">
-              <UserCircle className="w-4 h-4 mr-2" />
+              <UserCircle className="w-8 h-8 mr-2" />
               <span> Profile</span>
             </DropdownMenuItem>
             <DropdownMenuItem onClick={() => navigate("/settings")} className="cursor-pointer text-base">
