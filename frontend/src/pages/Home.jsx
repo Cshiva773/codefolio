@@ -115,7 +115,7 @@ const Home = () => {
               onClick={() => navigate("/github")}
               className="text-sm font-medium hover:underline"
             >
-              Event Tracker
+              Github Stats
             </a>
             <a
               href="#"
@@ -155,12 +155,14 @@ const Home = () => {
       <section className="hero">
         <div className="hero-text">
           <h1>
-            Track, analyze & <span className="highlight-orange">share</span>
+            Track, analyze & <span className="highlight-orange">share</span>{" "}
+            with AI
           </h1>
           <p>
-            <span className="highlight-blue">Cod</span>
-            <span className="highlight-orange">olio</span> helps you navigate
-            and track your coding journey to success
+            <span className="highlight-blue">Code</span>
+            <span className="highlight-orange">Folio</span> helps you navigate
+            and track your coding journey to success and AI guide you to achieve
+            your success
           </p>
           <div className="buttons">
             <a
@@ -189,9 +191,9 @@ const Home = () => {
         <div className="platforms-text">
           <h2>Your Favourite Coding Platforms</h2>
           <p>
-            Streamlined in <span className="highlight-blue">Codo</span>
+            Streamlined in <span className="highlight-blue">CodeFo</span>
             <span className="highlight-orange">lio</span>
-            to simplify your coding journey
+            to track all your coding profiles in one place.
           </p>
         </div>
         <div className="flex justify-center items-center">
@@ -272,11 +274,11 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Dashboard Section */}
+      {/* Github Section */}
       <section className="dashboard-section">
         <div className="analytics-content">
           <h2 className="">
-            Your <span className="highlight-orange">Comprehensive</span>{" "}
+            Your <span className="highlight-orange">Github</span>{" "}
             <span className="highlight-blue">Analytics</span>
           </h2>
           <p>
@@ -286,16 +288,15 @@ const Home = () => {
           </p>
         </div>
         <div className="dashboard-image">
-          <img
-            src={s5}
-            alt="Dashboard-and-bar-analytics"
-          />
+          <img src={s5} alt="Dashboard-and-bar-analytics" />
         </div>
       </section>
 
       {/* FAQ Section */}
       <section className="faq-section" id="faq">
-        <h2>Frequently asked questions</h2>
+        <h2>
+          <span className="highlight-orange">Frequently</span> asked questions
+        </h2>
         <div className="faq-container">
           {faqItems.map((item, index) => (
             <div className="faq-item" key={index}>
@@ -323,7 +324,7 @@ const Home = () => {
           Ready to <span className="highlight">unlock</span> your Coding
           Portfolio?
         </h2>
-        <p className="subtext">Unlock your codolio profile now</p>
+        <p className="subtext">Unlock your CodeFolio profile now</p>
         {isLoggedIn ? (
           <a
             href="#"
@@ -359,7 +360,7 @@ const Home = () => {
             <i className="fab fa-instagram"></i>
           </a>
         </div>
-        <p className="copyright">© 2024 Codolio, Inc. All rights reserved.</p>
+        <p className="copyright">© 2025 CodeFolio, Inc. All rights reserved.</p>
       </footer>
 
       <style jsx>{`
@@ -1058,7 +1059,7 @@ const Home = () => {
             zIndex: 1000,
           }}
         >
-          <img src={arrow} alt="" />
+          <img src={arrow} alt=""/>
         </button>
       )}
     </div>
