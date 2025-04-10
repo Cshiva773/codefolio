@@ -55,6 +55,9 @@ const Home = () => {
 
   const navigate = useNavigate();
 
+  // scroller
+  
+
   return (
     <div className="codefolio">
       {/* Fixed Header - Added proper spacing for content below */}
@@ -68,33 +71,50 @@ const Home = () => {
 
           {/* Navigation */}
           <nav className="flex gap-x-6">
-            <a href="#">FAQ</a>
-            <a href="#" onClick={() => navigate("/problems")}>
+            <a href="#faq" className="text-sm font-medium hover:underline">
+              FAQ
+            </a>
+            <a
+              href="#"
+              onClick={() => navigate("/problems")}
+              className="text-sm font-medium hover:underline"
+            >
               Question Tracker
             </a>
-            <a href="#" onClick={() => navigate("/github")}>
+            <a
+              href="#"
+              onClick={() => navigate("/github")}
+              className="text-sm font-medium hover:underline"
+            >
               Event Tracker
             </a>
-            <a href="#" onClick={() => navigate("/dashboard")}>
+            <a
+              href="#"
+              onClick={() => navigate("/dashboard")}
+              className="text-sm font-medium hover:underline"
+            >
               Profile Tracker
             </a>
           </nav>
 
-
-
           {/* Login Button */}
-          {
-            isLoggedIn ? (
-              <a href="#" className="login-btn" onClick={() => navigate("/dashboard")}>
-                Dashboard
-              </a>
-            ) : (
-              <a href="#" className="btn btn-filled" onClick={() => navigate("/login")}>
-                Login
-              </a>
-            )
-          }
-          
+          {isLoggedIn ? (
+            <a
+              href="#"
+              className="login-btn"
+              onClick={() => navigate("/dashboard")}
+            >
+              Dashboard
+            </a>
+          ) : (
+            <a
+              href="#"
+              className="btn btn-filled"
+              onClick={() => navigate("/login")}
+            >
+              Login
+            </a>
+          )}
         </div>
       </header>
 
@@ -235,7 +255,7 @@ const Home = () => {
       {/* Dashboard Section */}
       <section className="dashboard-section">
         <div className="analytics-content">
-          <h2 className=''>
+          <h2 className="">
             Your <span className="highlight-orange">Comprehensive</span>{" "}
             <span className="highlight-blue">Analytics</span>
           </h2>
@@ -254,7 +274,7 @@ const Home = () => {
       </section>
 
       {/* FAQ Section */}
-      <section className="faq-section">
+      <section className="faq-section" id="faq">
         <h2>Frequently asked questions</h2>
         <div className="faq-container">
           {faqItems.map((item, index) => (
@@ -339,7 +359,7 @@ const Home = () => {
 
         /* Header styles - Fixed positioning */
         .header {
-          background-color: #070F2B;
+          background-color: #070f2b;
           box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
           position: fixed;
           top: 0;
@@ -470,7 +490,11 @@ const Home = () => {
         .hero {
           text-align: center;
           padding: 80px 10% 40px;
-          background: linear-gradient(135deg, #070F2B 0%, #52057B 100%); /* Gradient from black to deep purple */
+          background: linear-gradient(
+            135deg,
+            #070f2b 0%,
+            #52057b 100%
+          ); /* Gradient from black to deep purple */
         }
 
         /* Text Content */
@@ -488,16 +512,16 @@ const Home = () => {
         }
 
         .highlight-orange {
-          color: #BC6FF1; /* Light purple */
+          color: #bc6ff1; /* Light purple */
         }
 
         .highlight-blue {
-          color: #892CDC; /* Medium purple */
+          color: #892cdc; /* Medium purple */
           font-weight: bold;
         }
 
         .highlight {
-          color: #BC6FF1; /* Light purple */
+          color: #bc6ff1; /* Light purple */
           font-weight: bold;
         }
 
@@ -526,8 +550,8 @@ const Home = () => {
         }
 
         .btn-outline {
-          border: 2px solid #BC6FF1;
-          color: #BC6FF1;
+          border: 2px solid #bc6ff1;
+          color: #bc6ff1;
           background: rgba(0, 0, 0, 0.3);
         }
 
@@ -536,7 +560,7 @@ const Home = () => {
         }
 
         .btn-filled {
-          background: #892CDC;
+          background: #892cdc;
           color: white;
         }
 
@@ -562,7 +586,7 @@ const Home = () => {
         .platforms {
           text-align: center;
           padding: 60px 10%;
-          background: #52057B; /* Deep purple */
+          background: #52057b; /* Deep purple */
         }
 
         /* Text Content */
@@ -605,7 +629,11 @@ const Home = () => {
           align-items: center;
           text-align: center;
           padding: 60px 10%;
-          background: linear-gradient(135deg, #070F2B 0%, #892CDC 100%); /* Gradient from deep to medium purple */
+          background: linear-gradient(
+            135deg,
+            #070f2b 0%,
+            #892cdc 100%
+          ); /* Gradient from deep to medium purple */
         }
 
         /* Text Content */
@@ -631,7 +659,7 @@ const Home = () => {
           display: inline-block;
           margin-top: 15px;
           font-size: 16px;
-          color: #BC6FF1; /* Light purple */
+          color: #bc6ff1; /* Light purple */
           text-decoration: none;
           font-weight: bold;
         }
@@ -674,7 +702,7 @@ const Home = () => {
           font-weight: bold;
           margin-top: 10px;
           margin-bottom: 5px;
-          color: #BC6FF1; /* Light purple */
+          color: #bc6ff1; /* Light purple */
         }
 
         .feature p {
@@ -704,7 +732,7 @@ const Home = () => {
           align-items: center;
           text-align: center;
           padding: 60px 20px;
-          background-color: #892CDC; /* Medium purple */
+          background-color: #892cdc; /* Medium purple */
         }
 
         .analytics-content {
@@ -745,7 +773,11 @@ const Home = () => {
           align-items: center;
           text-align: center;
           padding: 60px 20px;
-          background: linear-gradient(135deg, #070F2B 0%, #BC6FF1 100%); /* Gradient from medium to light purple */
+          background: linear-gradient(
+            135deg,
+            #070f2b 0%,
+            #bc6ff1 100%
+          ); /* Gradient from medium to light purple */
         }
 
         .dashboard-content {
@@ -783,7 +815,7 @@ const Home = () => {
         .faq-section {
           text-align: center;
           padding: 60px 20px;
-          background-color: #BC6FF1; /* Light purple */
+          background-color: #bc6ff1; /* Light purple */
         }
 
         .faq-section h2 {
@@ -815,7 +847,7 @@ const Home = () => {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          color: #FFFFFF;
+          color: #ffffff;
         }
 
         .icon {
@@ -826,7 +858,7 @@ const Home = () => {
 
         .faq-answer {
           padding-top: 10px;
-          color:  #ffA500;
+          color: #ffa500;
         }
 
         .more-link {
@@ -845,7 +877,11 @@ const Home = () => {
         .cta-section {
           text-align: center;
           padding: 60px 20px;
-          background: linear-gradient(135deg, #BC6FF1 0%, #52057B 100%); /* Gradient from light to deep purple */
+          background: linear-gradient(
+            135deg,
+            #bc6ff1 0%,
+            #52057b 100%
+          ); /* Gradient from light to deep purple */
         }
 
         .cta-section h2 {
@@ -864,7 +900,7 @@ const Home = () => {
         .cta-button {
           display: inline-block;
           padding: 12px 20px;
-          background-color: #892CDC;
+          background-color: #892cdc;
           color: white;
           font-size: 1rem;
           font-weight: bold;
@@ -875,7 +911,7 @@ const Home = () => {
         }
 
         .cta-button:hover {
-          background-color: #BC6FF1;
+          background-color: #bc6ff1;
           transform: translateY(-2px);
           box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
         }
@@ -885,7 +921,7 @@ const Home = () => {
           text-align: center;
           padding: 30px 20px;
           background-color: #000000;
-          border-top: 1px solid #52057B;
+          border-top: 1px solid #52057b;
         }
 
         .footer-links {
@@ -897,7 +933,7 @@ const Home = () => {
         }
 
         .footer-links a {
-          color: #BC6FF1;
+          color: #bc6ff1;
           text-decoration: none;
           margin: 0 15px;
           font-size: 14px;
@@ -913,7 +949,7 @@ const Home = () => {
         }
 
         .social-icons a {
-          color: #BC6FF1;
+          color: #bc6ff1;
           font-size: 24px;
           margin: 0 10px;
           transition: all 0.3s ease;
@@ -927,7 +963,7 @@ const Home = () => {
 
         .copyright {
           font-size: 12px;
-          color: #892CDC;
+          color: #892cdc;
           margin: 0;
         }
 
