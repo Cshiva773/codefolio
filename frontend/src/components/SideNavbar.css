@@ -33,13 +33,20 @@
     margin-bottom: 12px;
   }
   
-  .profile-image {
-    width: 32px;
-    height: 32px;
+  .profile-wrapper {
+    width: 128px;
+    height: 128px;
     border-radius: 50%;
-    object-fit: cover;
+    overflow: hidden;
+    border: 4px solid var(--border-color);
+    position: relative;
   }
   
+  .profile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
   
   .profile-info {
     text-align: center;
