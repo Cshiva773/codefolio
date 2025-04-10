@@ -98,23 +98,7 @@ const Home = () => {
           </nav>
 
           {/* Login Button */}
-          {isLoggedIn ? (
-            <a
-              href="#"
-              className="login-btn"
-              onClick={() => navigate("/dashboard")}
-            >
-              Dashboard
-            </a>
-          ) : (
-            <a
-              href="#"
-              className="btn btn-filled"
-              onClick={() => navigate("/login")}
-            >
-              Login
-            </a>
-          )}
+          
           {
             isLoggedIn ? (
               <a href="#" className="btn btn-filled" onClick={() => navigate("/dashboard")}>
