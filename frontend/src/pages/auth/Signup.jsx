@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Image from "../../assets/image.png";
+import Image from "../../assets/sideimg.png";
 import Logo from "../../assets/logo.png";
 import GoogleSvg from "../../assets/icons8-google.svg";
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
@@ -51,7 +51,7 @@ const handleSubmit = async (e) => {
       <div className="login-right">
         <div className="login-right-container">
           <div className="login-logo">
-            <img src={Logo} alt="Logo" />
+            <img src={"https://i.ibb.co/CjjXS5q/2095.png"} alt="Logo" />
           </div>
           <div className="login-center">
             <h2>Create an account</h2>

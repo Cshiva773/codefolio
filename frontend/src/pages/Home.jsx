@@ -69,8 +69,12 @@ const Home = () => {
           {/* Navigation */}
           <nav className="flex gap-x-6">
             <a href="#">FAQ</a>
-            <a href="#">Question Tracker</a>
-            <a href="#">Event Tracker</a>
+            <a href="#" onClick={() => navigate("/problems")}>
+              Question Tracker
+            </a>
+            <a href="#" onClick={() => navigate("/github")}>
+              Event Tracker
+            </a>
             <a href="#" onClick={() => navigate("/dashboard")}>
               Profile Tracker
             </a>
@@ -109,7 +113,11 @@ const Home = () => {
             and track your coding journey to success
           </p>
           <div className="buttons">
-            <a href="#" className="btn btn-outline">
+            <a
+              href="#"
+              className="btn btn-outline"
+              onClick={() => navigate("/problems")}
+            >
               Question Tracker
             </a>
             <a
@@ -160,7 +168,11 @@ const Home = () => {
             </span>{" "}
             in one place for easy review and revision.
           </p>
-          <a href="#" className="question-tracker">
+          <a
+            href="#"
+            className="question-tracker"
+            onClick={() => navigate("/problems")}
+          >
             Try Question Tracker →
           </a>
 
