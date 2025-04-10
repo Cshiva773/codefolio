@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/AuthContext';
+import DashBoard from '../assets/DashBoard.png';
+import s2 from '../assets/2.png';
+import s3 from '../assets/3.png';
+import s4 from '../assets/4.png';
+import s5 from "../assets/5.png";
+import arrow from '../assets/arrow.png';
 
 const Home = () => {
   const { user } = useAuth(); // Get user from AuthContext
@@ -56,6 +62,29 @@ const Home = () => {
   const navigate = useNavigate();
 
   // scroller
+
+  const [showButton, setShowButton] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 100) {
+        setShowButton(true);
+      } else {
+        setShowButton(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    // Cleanup on unmount
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
   
 
   return (
@@ -98,19 +127,24 @@ const Home = () => {
           </nav>
 
           {/* Login Button */}
-          
-          {
-            isLoggedIn ? (
-              <a href="#" className="btn btn-filled" onClick={() => navigate("/dashboard")}>
-                Dashboard
-              </a>
-            ) : (
-              <a href="#" className="btn btn-filled" onClick={() => navigate("/login")}>
-                Login
-              </a>
-            )
-          }
-          
+
+          {isLoggedIn ? (
+            <a
+              href="#"
+              className="btn btn-filled"
+              onClick={() => navigate("/dashboard")}
+            >
+              Dashboard
+            </a>
+          ) : (
+            <a
+              href="#"
+              className="btn btn-filled"
+              onClick={() => navigate("/login")}
+            >
+              Login
+            </a>
+          )}
         </div>
       </header>
 
@@ -146,10 +180,7 @@ const Home = () => {
           </div>
         </div>
         <div className="hero-image">
-          <img
-            src="https://i.ibb.co/20JG40Pm/Dashboard-and-bar-analytics.png"
-            alt="Dashboard Analytics"
-          />
+          <img src={DashBoard} alt="Dashboard Analytics" />
         </div>
       </section>
 
@@ -163,11 +194,10 @@ const Home = () => {
             to simplify your coding journey
           </p>
         </div>
-        <div className="platforms-image">
-          <img
-            src="https://i.ibb.co/20JG40Pm/Dashboard-and-bar-analytics.png"
-            alt="Coding Platforms"
-          />
+        <div className="flex justify-center items-center">
+          <div className="platforms-image max-w-xs md:max-w-md lg:max-w-lg mx-auto flex justify-center items-center">
+            <img src={s2} alt="Coding Platforms" />
+          </div>
         </div>
       </section>
 
@@ -220,10 +250,7 @@ const Home = () => {
           </div>
         </div>
         <div className="prep-image">
-          <img
-            src="https://i.ibb.co/20JG40Pm/Dashboard-and-bar-analytics.png"
-            alt="Dashboard and Analytics"
-          />
+          <img src={s3} alt="Dashboard and Analytics" />
         </div>
       </section>
 
@@ -241,10 +268,7 @@ const Home = () => {
           </p>
         </div>
         <div className="analytics-image">
-          <img
-            src="https://i.ibb.co/20JG40Pm/Dashboard-and-bar-analytics.png"
-            alt="Dashboard-and-bar-analytics"
-          />
+          <img src={s4} alt="Dashboard-and-bar-analytics" />
         </div>
       </section>
 
@@ -263,7 +287,7 @@ const Home = () => {
         </div>
         <div className="dashboard-image">
           <img
-            src="https://i.ibb.co/20JG40Pm/Dashboard-and-bar-analytics.png"
+            src={s5}
             alt="Dashboard-and-bar-analytics"
           />
         </div>
@@ -300,17 +324,19 @@ const Home = () => {
           Portfolio?
         </h2>
         <p className="subtext">Unlock your codolio profile now</p>
-        {
-          isLoggedIn ? (
-            <a href="#" className="cta-button" onClick={() => navigate("/dashboard")}>
-              Dashboard →
-            </a>
-          ) : (
-            <a href="#" className="cta-button" onClick={() => navigate("/login")}>
-              Login / Signup →
-            </a>
-          )
-        }
+        {isLoggedIn ? (
+          <a
+            href="#"
+            className="cta-button"
+            onClick={() => navigate("/dashboard")}
+          >
+            Dashboard →
+          </a>
+        ) : (
+          <a href="#" className="cta-button" onClick={() => navigate("/login")}>
+            Login / Signup →
+          </a>
+        )}
       </section>
 
       {/* Footer */}
@@ -1004,6 +1030,37 @@ const Home = () => {
           }
         }
       `}</style>
+
+      {/* scroll */}
+
+      {/* Dummy content for scroll */}
+
+      {showButton && (
+        <button
+          onClick={scrollToTop}
+          style={{
+            position: "fixed",
+            bottom: "40px",
+            right: "40px",
+            width: "50px",
+            height: "50px",
+            fontSize: "20px",
+            // backgroundColor: "#007BFF",
+
+            color: "#fff",
+            border: "4px solid",
+            borderRadius: "30%",
+            cursor: "pointer",
+            boxShadow: "0 2px 5px rgba(0,0,0,0.3)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            zIndex: 1000,
+          }}
+        >
+          <img src={arrow} alt="" />
+        </button>
+      )}
     </div>
   );
 };
