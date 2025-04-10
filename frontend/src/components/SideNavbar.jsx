@@ -17,9 +17,22 @@ const SideNavbar = ({ user }) => {
   return (
     <div className="side-navbar">
       <div className="nav-profile">
-        <div className="profile-avatar">
-          {user?.fullName?.charAt(0) || user?.username?.charAt(0) || '👤'}
-        </div>
+      <div className="profile-wrapper">
+  {user?.profileInfo?.profilePicture ? (
+    <img
+      src={user.profileInfo.profilePicture}
+      alt="Profile"
+      className="profile-image"
+    />
+  ) : (
+    <div className="profile-avatar">
+      {user?.fullName?.charAt(0).toUpperCase() ||
+       user?.username?.charAt(0).toUpperCase() ||
+       "👤"}
+    </div>
+  )}
+</div>
+
         <div className="profile-info">
           <h3>{user?.fullName || user?.username || 'User'}</h3>
           <p className="stat-value">@{user?.username}</p>
@@ -77,7 +90,7 @@ const SideNavbar = ({ user }) => {
         </Link>
         <Link to="/problems" className={location.pathname === '/problems' ? 'active' : ''}>
           <span className="nav-icon">🧩</span>
-          <span>Problems</span>
+          <span>Problem Vault</span>
         </Link>
         <Link to="/community" className={location.pathname === '/community' ? 'active' : ''}>
           <span className="nav-icon">👥</span>

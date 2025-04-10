@@ -14,6 +14,8 @@ import CreatePost from "./pages/CreatePost";
 import EditPost from "./pages/EditPost";
 import PostNavbar from "./pages/PostNavbar";
 import AiInterviewer from "./pages/AiInterviewer";
+import UpdateProfilePage from "./pages/UpdateProfilePage";
+import ProblemSheet from "./pages/ProblemSheet";
 
 // Protected route component
 const ProtectedRoute = ({ children }) => {
@@ -87,30 +89,28 @@ function AppRoutes() {
         />
 
         <Route
+          path="/settings"
+          element={
+            <ProtectedRoute>
+              <UpdateProfilePage />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/problems"
+          element={
+            <ProtectedRoute>
+              <ProblemSheet />
+            </ProtectedRoute>
+          }
+          />
+
+        <Route
           path="/community"
           element={
             <ProtectedRoute>
-              <div className="app-container">
-                <PostNavbar />
-                <main className="main-content">
-                  <Routes>
-                    <Route path="/community" element={<DiscussionForum />} />
-                    <Route path="/community/post/:id" element={<PostDetail />} />
-                    <Route path="/community/create-post" element={
-                      <ProtectedRoute>
-                        <CreatePost />
-                      </ProtectedRoute>
-                    } />
-                    <Route path="/edit-post/:id" element={
-                      <ProtectedRoute>
-                        <EditPost />
-                      </ProtectedRoute>
-                    } />
-
-                  </Routes>
-                </main>
-              </div>
-              <div>Community Page</div>
+              <DiscussionForum />
             </ProtectedRoute>
           }
         />

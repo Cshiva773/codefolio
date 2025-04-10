@@ -56,7 +56,7 @@ export default function Header() {
               <UserCircle className="w-4 h-4 mr-2" />
               <span> Profile</span>
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => navigate("/edit-profile")} className="cursor-pointer text-base">
+            <DropdownMenuItem onClick={() => navigate("/settings")} className="cursor-pointer text-base">
             <span>⚙️</span>
             Settings
             </DropdownMenuItem>

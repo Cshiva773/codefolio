@@ -4,6 +4,7 @@ import { toast } from 'react-toastify'
 import { useAuth } from '../AuthContext'
 import sImage from "../assets/social-profile.jpg";
 import TotalActiveDays from '../components/LeetCodeDashboard'
+import logo from '../assets/logo.png'
 
 
 const SocialProfile = () => {
@@ -188,7 +189,7 @@ const SocialProfile = () => {
       <div className="login-right">
         <div className="login-right-container">
           <div className="login-logo">
-            <img src="/path-to-your-logo.png" alt="Logo" />
+            <img src={logo} alt="Logo" />
           </div>
           
           <div className="login-center">
