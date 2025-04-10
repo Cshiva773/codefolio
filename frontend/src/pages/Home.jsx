@@ -98,23 +98,19 @@ const Home = () => {
           </nav>
 
           {/* Login Button */}
-          {isLoggedIn ? (
-            <a
-              href="#"
-              className="login-btn"
-              onClick={() => navigate("/dashboard")}
-            >
-              Dashboard
-            </a>
-          ) : (
-            <a
-              href="#"
-              className="btn btn-filled"
-              onClick={() => navigate("/login")}
-            >
-              Login
-            </a>
-          )}
+          
+          {
+            isLoggedIn ? (
+              <a href="#" className="btn btn-filled" onClick={() => navigate("/dashboard")}>
+                Dashboard
+              </a>
+            ) : (
+              <a href="#" className="btn btn-filled" onClick={() => navigate("/login")}>
+                Login
+              </a>
+            )
+          }
+          
         </div>
       </header>
 
@@ -304,9 +300,17 @@ const Home = () => {
           Portfolio?
         </h2>
         <p className="subtext">Unlock your codolio profile now</p>
-        <a href="#" className="cta-button" onClick={() => navigate("/signup")}>
-          Login / Signup →
-        </a>
+        {
+          isLoggedIn ? (
+            <a href="#" className="cta-button" onClick={() => navigate("/dashboard")}>
+              Dashboard →
+            </a>
+          ) : (
+            <a href="#" className="cta-button" onClick={() => navigate("/login")}>
+              Login / Signup →
+            </a>
+          )
+        }
       </section>
 
       {/* Footer */}
