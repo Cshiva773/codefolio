@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '@/AuthContext';
 
 const Home = () => {
+  const { user } = useAuth(); // Get user from AuthContext
+  const isLoggedIn = !!user; // Check if user is logged in
   // State for FAQ items
   const [faqItems, setFaqItems] = useState([
     {
@@ -73,10 +76,21 @@ const Home = () => {
             </a>
           </nav>
 
+
+
           {/* Login Button */}
-          <a href="#" className="login-btn" onClick={() => navigate("/login")}>
-            Login
-          </a>
+          {
+            isLoggedIn ? (
+              <a href="#" className="login-btn" onClick={() => navigate("/dashboard")}>
+                Dashboard
+              </a>
+            ) : (
+              <a href="#" className="btn btn-filled" onClick={() => navigate("/login")}>
+                Login
+              </a>
+            )
+          }
+          
         </div>
       </header>
 
@@ -190,7 +204,7 @@ const Home = () => {
         <div className="analytics-content">
           <h2>
             Your <span className="highlight-orange">Analytics</span>{" "}
-            <span className="highlight-blue">Dashboard</span>
+            <span>Dashboard</span>
           </h2>
           <p>
             Get deep insights into your coding journey with interactive charts
@@ -208,8 +222,8 @@ const Home = () => {
 
       {/* Dashboard Section */}
       <section className="dashboard-section">
-        <div className="dashboard-content">
-          <h2>
+        <div className="analytics-content">
+          <h2 className=''>
             Your <span className="highlight-orange">Comprehensive</span>{" "}
             <span className="highlight-blue">Analytics</span>
           </h2>
@@ -302,6 +316,8 @@ const Home = () => {
         .codefolio {
           width: 100%;
           overflow-x: hidden;
+          background-color: #000000; /* Base background - black */
+          color: #ffffff;
         }
 
         /* Header spacer to prevent content from going under fixed header */
@@ -311,7 +327,7 @@ const Home = () => {
 
         /* Header styles - Fixed positioning */
         .header {
-          background-color: #afddff;
+          background-color: #070F2B;
           box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
           position: fixed;
           top: 0;
@@ -442,7 +458,7 @@ const Home = () => {
         .hero {
           text-align: center;
           padding: 80px 10% 40px;
-          background: #fff;
+          background: linear-gradient(135deg, #070F2B 0%, #52057B 100%); /* Gradient from black to deep purple */
         }
 
         /* Text Content */
@@ -454,29 +470,29 @@ const Home = () => {
         .hero h1 {
           font-size: 48px;
           font-weight: bold;
-          color: #000;
+          color: #ffffff;
           line-height: 1.2;
           margin: 0;
         }
 
         .highlight-orange {
-          color: #ff9149;
+          color: #BC6FF1; /* Light purple */
         }
 
         .highlight-blue {
-          color: #afddff;
+          color: #892CDC; /* Medium purple */
           font-weight: bold;
         }
 
         .highlight {
-          color: #ff9149;
+          color: #BC6FF1; /* Light purple */
           font-weight: bold;
         }
 
         /* Subtitle */
         .hero p {
           font-size: 20px;
-          color: #666;
+          color: #ffffff;
           margin-top: 10px;
         }
 
@@ -498,22 +514,22 @@ const Home = () => {
         }
 
         .btn-outline {
-          border: 2px solid black;
-          color: black;
-          background: white;
+          border: 2px solid #BC6FF1;
+          color: #BC6FF1;
+          background: rgba(0, 0, 0, 0.3);
         }
 
         .btn-outline:hover {
-          background: #f4f4f4;
+          background: rgba(188, 111, 241, 0.1);
         }
 
         .btn-filled {
-          background: #ff9149;
+          background: #892CDC;
           color: white;
         }
 
         .btn-filled:hover {
-          background: #e07c3e;
+          background: #7424b3;
         }
 
         /* Hero Image */
@@ -526,13 +542,15 @@ const Home = () => {
         .hero-image img {
           width: 100%;
           max-width: 800px;
+          border-radius: 10px;
+          box-shadow: 0 5px 15px rgba(137, 44, 220, 0.3);
         }
 
         /* Platforms Section */
         .platforms {
           text-align: center;
           padding: 60px 10%;
-          background: #fff;
+          background: #52057B; /* Deep purple */
         }
 
         /* Text Content */
@@ -544,13 +562,13 @@ const Home = () => {
         .platforms h2 {
           font-size: 36px;
           font-weight: bold;
-          color: #000;
+          color: #ffffff;
           margin: 0;
         }
 
         .platforms p {
           font-size: 20px;
-          color: #666;
+          color: #ffffff;
           margin-top: 10px;
         }
 
@@ -564,6 +582,8 @@ const Home = () => {
         .platforms-image img {
           width: 100%;
           max-width: 900px;
+          border-radius: 10px;
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
         /* Prep Section */
@@ -573,7 +593,7 @@ const Home = () => {
           align-items: center;
           text-align: center;
           padding: 60px 10%;
-          background: #fff;
+          background: linear-gradient(135deg, #070F2B 0%, #892CDC 100%); /* Gradient from deep to medium purple */
         }
 
         /* Text Content */
@@ -584,13 +604,13 @@ const Home = () => {
         .prep-content h2 {
           font-size: 36px;
           font-weight: bold;
-          color: #000;
+          color: #ffffff;
           margin: 0;
         }
 
         .prep-content p {
           font-size: 18px;
-          color: #666;
+          color: #ffffff;
           margin-top: 10px;
         }
 
@@ -599,9 +619,13 @@ const Home = () => {
           display: inline-block;
           margin-top: 15px;
           font-size: 16px;
-          color: #007bff;
+          color: #BC6FF1; /* Light purple */
           text-decoration: none;
           font-weight: bold;
+        }
+
+        .question-tracker:hover {
+          color: #d4a4f8;
         }
 
         /* Features */
@@ -616,11 +640,21 @@ const Home = () => {
         .feature {
           text-align: center;
           max-width: 150px;
+          background: rgba(0, 0, 0, 0.3);
+          padding: 15px;
+          border-radius: 8px;
+          box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+          transition: transform 0.3s ease;
+        }
+
+        .feature:hover {
+          transform: translateY(-5px);
         }
 
         .feature img {
           width: 40px;
           height: 40px;
+          filter: invert(1);
         }
 
         .feature h4 {
@@ -628,11 +662,12 @@ const Home = () => {
           font-weight: bold;
           margin-top: 10px;
           margin-bottom: 5px;
+          color: #BC6FF1; /* Light purple */
         }
 
         .feature p {
           font-size: 14px;
-          color: #666;
+          color: #ffffff;
           margin: 0;
         }
 
@@ -647,6 +682,7 @@ const Home = () => {
           width: 100%;
           max-width: 600px;
           border-radius: 10px;
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
         /* Analytics Section */
@@ -656,7 +692,7 @@ const Home = () => {
           align-items: center;
           text-align: center;
           padding: 60px 20px;
-          background-color: #f9f9f9;
+          background-color: #892CDC; /* Medium purple */
         }
 
         .analytics-content {
@@ -668,11 +704,12 @@ const Home = () => {
           font-size: 2rem;
           font-weight: bold;
           margin: 0 0 10px 0;
+          color: #ffffff;
         }
 
         .analytics-content p {
           font-size: 1.1rem;
-          color: #555;
+          color: #ffffff;
           margin: 0;
         }
 
@@ -686,7 +723,7 @@ const Home = () => {
           width: 100%;
           max-width: 700px;
           border-radius: 10px;
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
         /* Dashboard Section */
@@ -696,7 +733,7 @@ const Home = () => {
           align-items: center;
           text-align: center;
           padding: 60px 20px;
-          background-color: #ffffff;
+          background: linear-gradient(135deg, #070F2B 0%, #BC6FF1 100%); /* Gradient from medium to light purple */
         }
 
         .dashboard-content {
@@ -708,11 +745,12 @@ const Home = () => {
           font-size: 2rem;
           font-weight: bold;
           margin: 0 0 10px 0;
+          color: #ffffff;
         }
 
         .dashboard-content p {
           font-size: 1.1rem;
-          color: #555;
+          color: #ffffff;
           margin: 0;
         }
 
@@ -726,29 +764,34 @@ const Home = () => {
           width: 100%;
           max-width: 800px;
           border-radius: 10px;
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
         /* FAQ Section */
         .faq-section {
           text-align: center;
           padding: 60px 20px;
-          background-color: #ffffff;
+          background-color: #BC6FF1; /* Light purple */
         }
 
         .faq-section h2 {
           font-size: 2rem;
           font-weight: bold;
           margin-bottom: 20px;
+          color: #000000;
         }
 
         .faq-container {
           max-width: 800px;
           margin: 0 auto;
+          background: rgba(0, 0, 0, 0.2);
+          border-radius: 10px;
+          padding: 20px;
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
         .faq-item {
-          border-bottom: 1px solid #ddd;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.2);
           padding: 15px 0;
           cursor: pointer;
           text-align: left;
@@ -760,6 +803,7 @@ const Home = () => {
           display: flex;
           justify-content: space-between;
           align-items: center;
+          color: #FFFFFF;
         }
 
         .icon {
@@ -770,14 +814,14 @@ const Home = () => {
 
         .faq-answer {
           padding-top: 10px;
-          color: #555;
+          color:  #ffA500;
         }
 
         .more-link {
           display: block;
           margin-top: 20px;
           text-decoration: none;
-          color: #007bff;
+          color: #000000;
           font-weight: bold;
         }
 
@@ -789,18 +833,18 @@ const Home = () => {
         .cta-section {
           text-align: center;
           padding: 60px 20px;
-          background-color: #ffffff;
+          background: linear-gradient(135deg, #BC6FF1 0%, #52057B 100%); /* Gradient from light to deep purple */
         }
 
         .cta-section h2 {
           font-size: 2rem;
           font-weight: bold;
-          color: #000;
+          color: #ffffff;
           margin: 0;
         }
 
         .subtext {
-          color: #6c757d;
+          color: #ffffff;
           font-size: 1rem;
           margin: 10px 0 20px;
         }
@@ -808,25 +852,28 @@ const Home = () => {
         .cta-button {
           display: inline-block;
           padding: 12px 20px;
-          background-color: #ff9149;
+          background-color: #892CDC;
           color: white;
           font-size: 1rem;
           font-weight: bold;
           border-radius: 8px;
           text-decoration: none;
-          transition: background 0.3s ease-in-out;
+          transition: all 0.3s ease-in-out;
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
 
         .cta-button:hover {
-          background-color: #e67e22;
+          background-color: #BC6FF1;
+          transform: translateY(-2px);
+          box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
         }
 
         /* Footer */
         .footer {
           text-align: center;
           padding: 30px 20px;
-          background-color: #ffffff;
-          border-top: 1px solid #ddd;
+          background-color: #000000;
+          border-top: 1px solid #52057B;
         }
 
         .footer-links {
@@ -838,7 +885,7 @@ const Home = () => {
         }
 
         .footer-links a {
-          color: #6c757d;
+          color: #BC6FF1;
           text-decoration: none;
           margin: 0 15px;
           font-size: 14px;
@@ -846,7 +893,7 @@ const Home = () => {
         }
 
         .footer-links a:hover {
-          color: #ff9149;
+          color: #d4a4f8;
         }
 
         .social-icons {
@@ -854,20 +901,21 @@ const Home = () => {
         }
 
         .social-icons a {
-          color: #000;
+          color: #BC6FF1;
           font-size: 24px;
           margin: 0 10px;
-          transition: color 0.3s ease;
+          transition: all 0.3s ease;
           display: inline-block;
         }
 
         .social-icons a:hover {
-          color: #ff9149;
+          color: #d4a4f8;
+          transform: scale(1.2);
         }
 
         .copyright {
           font-size: 12px;
-          color: #6c757d;
+          color: #892CDC;
           margin: 0;
         }
 
