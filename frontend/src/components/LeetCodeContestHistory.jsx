@@ -24,7 +24,7 @@ function LeetCodeContestHistory({ username }) {
           }`
         };
         
-        const response = await fetch('http://localhost:3000/api/leetcode', {  // Use your backend server URL
+        const response = await fetch('https://codefolio-4.onrender.com/api/leetcode', {  // Use your backend server URL
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

@@ -31,7 +31,7 @@ const CreatePost = () => {
   
   const fetchCompanies = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/companies');
+      const response = await fetch('https://codefolio-4.onrender.com/api/companies');
       if (response.ok) {
         const data = await response.json();
         setCompanies(data.data || []);
@@ -43,7 +43,7 @@ const CreatePost = () => {
   
   const fetchIndustries = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/industries');
+      const response = await fetch('https://codefolio-4.onrender.com/api/industries');
       if (response.ok) {
         const data = await response.json();
         setIndustries(data.data || []);
@@ -125,7 +125,7 @@ const CreatePost = () => {
         formData.summary = formData.content.substring(0, 150) + (formData.content.length > 150 ? '...' : '');
       }
       
-      const response = await fetch('http://localhost:3000/api/posts', {
+      const response = await fetch('https://codefolio-4.onrender.com/api/posts', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,

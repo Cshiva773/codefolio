@@ -15,7 +15,7 @@ const BookmarkButton = ({ postId, isBookmarked }) => {
     }
 
     try {
-      const response = await fetch(`http://localhost:3000/api/posts/${postId}/bookmark`, {
+      const response = await fetch(`https://codefolio-4.onrender.com/api/posts/${postId}/bookmark`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,

@@ -34,7 +34,7 @@ const EditPost = () => {
   
   const fetchPost = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/api/posts/${id}`);
+      const response = await fetch(`https://codefolio-4.onrender.com/api/posts/${id}`);
       
       if (!response.ok) {
         throw new Error('Failed to fetch post');
@@ -70,7 +70,7 @@ const EditPost = () => {
   
   const fetchCompanies = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/companies');
+      const response = await fetch('https://codefolio-4.onrender.com/api/companies');
       if (response.ok) {
         const data = await response.json();
         setCompanies(data.data || []);
@@ -82,7 +82,7 @@ const EditPost = () => {
   
   const fetchIndustries = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/industries');
+      const response = await fetch('https://codefolio-4.onrender.com/api/industries');
       if (response.ok) {
         const data = await response.json();
         setIndustries(data.data || []);
@@ -164,7 +164,7 @@ const EditPost = () => {
         formData.summary = formData.content.substring(0, 150) + (formData.content.length > 150 ? '...' : '');
       }
       
-      const response = await fetch(`http://localhost:3000/api/posts/${id}`, {
+      const response = await fetch(`https://codefolio-4.onrender.com/api/posts/${id}`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,

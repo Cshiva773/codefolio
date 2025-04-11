@@ -19,7 +19,7 @@ const VoteButtons = ({ postId, upVotes = [], downVotes = [] }) => {
 
     try {
       const endpoint = voteType === 'up' ? 'upvote' : 'downvote';
-      const response = await fetch(`http://localhost:3000/api/posts/${postId}/${endpoint}`, {
+      const response = await fetch(`https://codefolio-4.onrender.com/api/posts/${postId}/${endpoint}`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,

@@ -31,7 +31,7 @@ function LeetCodeDashboard() {
       }
 
       try {
-        const response = await fetch("http://localhost:3000/api/user/profile", {
+        const response = await fetch("https://codefolio-4.onrender.com/api/user/profile", {
           method: 'GET',
           credentials: 'include',
           headers: {
