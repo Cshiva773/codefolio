@@ -10,7 +10,7 @@ import searchRoutes from './routes/search.routes.js';
 import { validateComment,validateFilterParams,validateReply,validateCreatePost,validateUpdatePost } from './middlewares/post.middleware.js';
 const app=express()
 app.use(cors({
-    origin:process.env.CLIENT_URL,
+    origin:"https://codefolio-4.vercel.app/",
     credentials:true
 }))
 
