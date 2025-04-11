@@ -19,6 +19,10 @@ body {
   height: 100vh;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 /* Updated font sizes using rem based on new 16px base */
 .login-main {
   display: flex;
@@ -66,7 +70,7 @@ body {
 }
 
 .login-logo img {
-  width: 50px;
+  width: 90px;
 }
 
 .login-center h2 {

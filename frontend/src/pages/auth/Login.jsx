@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Image from "../../assets/image.png";
+import Image from "../../assets/sideimg.png";
 import Logo from "../../assets/logo.png";
 import GoogleSvg from "../../assets/icons8-google.svg";
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
@@ -37,15 +37,34 @@ const Login = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
-
+    
       const data = await response.json();
       if (!response.ok) {
         throw new Error(data.message || "Login failed");
       }
       
-      // Use the login function from context instead of directly setting localStorage
-      login(data.user);
+      // Map the response data to what your AuthContext expects
+      const loginSuccessful = login({
+        ...data.user,
+        token: data.accessToken  // This is the key change - mapping accessToken to token
+      });
       
+      if (loginSuccessful) {
+        toast.success("Login successful! Redirecting...");
+        
+        // Navigate to dashboard after a short delay
+        setTimeout(() => {
+          navigate("/dashboard");
+        }, 1000);
+      } else {
+        toast.error("Login failed: Authentication issue");
+      }
+      // Pass both user and tokens to the login function
+      login({
+        user: data.user,
+        accessToken: data.accessToken,
+        refreshToken: data.refreshToken
+      });
       toast.success("Login successful! Redirecting...");
       
       // Navigate to dashboard after a short delay
@@ -65,32 +84,33 @@ const Login = () => {
       <div className="login-right">
         <div className="login-right-container">
           <div className="login-logo">
-            <img src={Logo} alt="Logo" />
+            <img src={"https://i.ibb.co/CjjXS5q/2095.png"} alt="Logo" />
           </div>
           <div className="login-center">
             <h2>Welcome back!</h2>
             <p>Please enter your details</p>
             {error && <p style={{ color: "red" }}>{error}</p>}
             <form onSubmit={handleSubmit}>
-              <input 
-                type="email" 
-                placeholder="Email" 
+              <input
+                type="email"
+                placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                required 
+                required
               />
               <div className="pass-input-div">
-                <input 
-                  type={showPassword ? "text" : "password"} 
+                <input
+                  type={showPassword ? "text" : "password"}
                   placeholder="Password"
-                  value={password} 
+                  value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  required 
+                  required
                 />
-                {showPassword ? 
-                  <FaEyeSlash onClick={() => setShowPassword(!showPassword)} /> : 
+                {showPassword ? (
+                  <FaEyeSlash onClick={() => setShowPassword(!showPassword)} />
+                ) : (
                   <FaEye onClick={() => setShowPassword(!showPassword)} />
-                }
+                )}
               </div>
 
               <div className="login-center-options">

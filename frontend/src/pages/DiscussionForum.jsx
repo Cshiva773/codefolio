@@ -8,6 +8,7 @@ import SearchBar from "../components/discussion/SearchBar"
 import "./discussion-forum.css"
 import SideNavbar from "@/components/SideNavbar"
 import Header from "@/components/Header"
+import { Hourglass } from "lucide-react"
 
 // Define your API base URL here
 const API_BASE_URL = "/api" // Change this to match your backend URL (e.g., 'http://localhost:5000/api')
@@ -215,63 +216,18 @@ const DiscussionForum = () => {
       <Header />
       <div className='flex flex-col h-screen'>
         <SideNavbar user={userData}/>
-        <div className="discussion-forum">
-          <div className="discussion-forum-header">
-            <h1>Discussion Forum</h1>
-            <button className="create-post-btn" onClick={() => setShowCreatePost(true)}>
-              Create New Post
-            </button>
-          </div>
-
-          <div className="discussion-forum-controls">
-            <SearchBar onSearch={handleSearch} />
-            <FilterBar
-              filters={filters}
-              onFilterChange={handleFilterChange}
-              companies={companies}
-              industries={industries}
-            />
-          </div>
-
-          {loading && <div className="loading-spinner">Loading posts...</div>}
-
-          {error && (
-            <div className="error-message">
-              <h3>Error loading posts</h3>
-              <p>{error}</p>
-              <button
-                onClick={() => {
-                  setError(null)
-                  setPagination((prev) => ({ ...prev, currentPage: 1 }))
-                }}
-                className="retry-btn"
-              >
-                Retry
-              </button>
-            </div>
-          )}
-
-          {!loading && !error && (
-            <PostList
-              posts={posts}
-              onInteraction={handlePostInteraction}
-              pagination={pagination}
-              onPageChange={handlePageChange}
-            />
-          )}
-
-          {showCreatePost && (
-            <div className="modal-overlay">
-              <CreatePost
-                onClose={() => setShowCreatePost(false)}
-                onPostCreated={handlePostCreated}
-                companies={companies}
-                industries={industries}
-                apiRequest={apiRequest}
-              />
-            </div>
-          )}
-        </div>
+        <div className="min-h-screen flex flex-col items-center justify-center bg-white text-center px-4">
+      <div className="bg-blue-100 p-4 rounded-full mb-4">
+        <Hourglass size={40} className="text-blue-500 animate-pulse" />
+      </div>
+      <h1 className="text-4xl font-bold text-gray-800 mb-3">
+        This Feature is Coming Soon!
+      </h1>
+      <p className="text-lg text-gray-600 mb-6 max-w-md">
+        We're putting the finishing touches on this feature to give you the best experience possible. Hang tight — it's almost here!
+      </p>
+      
+    </div>
       </div>
     </>
   )
