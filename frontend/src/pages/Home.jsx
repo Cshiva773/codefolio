@@ -155,7 +155,7 @@ const Home = () => {
       <section className="hero">
         <div className="hero-text">
           <h1>
-            Track, analyze & <span className="highlight-orange">share</span>{" "}
+            Track, analyze & <span className="highlight-orange">Interview</span>{" "}
             with AI
           </h1>
           <p>
@@ -192,7 +192,7 @@ const Home = () => {
           <h2>Your Favourite Coding Platforms</h2>
           <p>
             Streamlined in <span className="highlight-blue">CodeFo</span>
-            <span className="highlight-orange">lio</span>
+            <span className="highlight-orange">lio </span>
             to track all your coding profiles in one place.
           </p>
         </div>
