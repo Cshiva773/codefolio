@@ -70,7 +70,7 @@ const ResumeInput = ({ setResumeData }) => {
           />
         </div>
         
-        <button type="submit" className="submit-button">Process Resume Data</button>
+        <button type="submit" className="submit-button">Process Start Interview</button>
       </form>
       
       {processingStatus && (
