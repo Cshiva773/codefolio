@@ -37,15 +37,34 @@ const Login = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
-
+    
       const data = await response.json();
       if (!response.ok) {
         throw new Error(data.message || "Login failed");
       }
       
-      // Use the login function from context instead of directly setting localStorage
-      login(data.user);
+      // Map the response data to what your AuthContext expects
+      const loginSuccessful = login({
+        ...data.user,
+        token: data.accessToken  // This is the key change - mapping accessToken to token
+      });
       
+      if (loginSuccessful) {
+        toast.success("Login successful! Redirecting...");
+        
+        // Navigate to dashboard after a short delay
+        setTimeout(() => {
+          navigate("/dashboard");
+        }, 1000);
+      } else {
+        toast.error("Login failed: Authentication issue");
+      }
+      // Pass both user and tokens to the login function
+      login({
+        user: data.user,
+        accessToken: data.accessToken,
+        refreshToken: data.refreshToken
+      });
       toast.success("Login successful! Redirecting...");
       
       // Navigate to dashboard after a short delay
