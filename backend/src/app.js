@@ -10,9 +10,10 @@ import searchRoutes from './routes/search.routes.js';
 import { validateComment,validateFilterParams,validateReply,validateCreatePost,validateUpdatePost } from './middlewares/post.middleware.js';
 const app=express()
 app.use(cors({
-    origin:process.env.CLIENT_URL,
-    credentials:true
-}))
+    origin: "https://codefolio-orcin-one.vercel.app",
+    credentials: true
+}));
+
 
 app.use(express.json({
     limit:"16kb"
