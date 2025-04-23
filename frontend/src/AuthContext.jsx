@@ -56,7 +56,7 @@ export const AuthProvider = ({ children }) => {
     try {
       console.log("Sending Signup Data:", userData);
   
-      const response = await fetch("http://localhost:3000/api/auth/signup", {
+      const response = await fetch("https://codefolio-4.onrender.com/api/auth/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(userData),
@@ -101,7 +101,7 @@ export const AuthProvider = ({ children }) => {
     if (!currentToken) return false;
     
     try {
-      const response = await fetch("http://localhost:3000/api/auth/verify-token", {
+      const response = await fetch("https://codefolio-4.onrender.com/api/auth/verify-token", {
         method: "GET",
         headers: {
           "Authorization": `Bearer ${currentToken}`

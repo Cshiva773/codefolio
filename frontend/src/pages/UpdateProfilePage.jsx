@@ -52,7 +52,7 @@ const UpdateProfilePage = () => {
       }
 
       try {
-        const response = await fetch("http://localhost:3000/api/user/profile", {
+        const response = await fetch("https://codefolio-4.onrender.com/api/user/profile", {
           method: 'GET',
           credentials: 'include',
           headers: {
@@ -122,7 +122,7 @@ const UpdateProfilePage = () => {
     const authToken = token || localStorage.getItem("authToken");
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:3000/api/user/update-profile', {
+      const response = await fetch('https://codefolio-4.onrender.com/api/user/update-profile', {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -166,7 +166,7 @@ const UpdateProfilePage = () => {
 
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:3000/api/auth/update-password', {
+      const response = await fetch('https://codefolio-4.onrender.com/api/auth/update-password', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -212,7 +212,7 @@ const UpdateProfilePage = () => {
 
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:3000/api/auth/update-profile-picture', {
+      const response = await fetch('https://codefolio-4.onrender.com/api/auth/update-profile-picture', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${authToken}` // Add the auth token here

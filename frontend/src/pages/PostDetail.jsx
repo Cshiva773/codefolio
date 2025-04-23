@@ -27,7 +27,7 @@ const PostDetail = () => {
 
   const fetchPost = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/api/posts/${id}`);
+      const response = await fetch(`https://codefolio-4.onrender.com/api/posts/${id}`);
       
       if (!response.ok) {
         throw new Error('Failed to fetch post');
@@ -45,7 +45,7 @@ const PostDetail = () => {
 
   const incrementViews = async () => {
     try {
-      await fetch(`http://localhost:3000/api/posts/${id}/views`, {
+      await fetch(`https://codefolio-4.onrender.com/api/posts/${id}/views`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -59,7 +59,7 @@ const PostDetail = () => {
 
   const handleDelete = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/api/posts/${id}`, {
+      const response = await fetch(`https://codefolio-4.onrender.com/api/posts/${id}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`,

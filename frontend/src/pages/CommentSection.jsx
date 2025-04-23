@@ -16,7 +16,7 @@ const CommentSection = ({ postId }) => {
 
   const fetchComments = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/api/posts/${postId}/comments`);
+      const response = await fetch(`https://codefolio-4.onrender.com/api/posts/${postId}/comments`);
       
       if (!response.ok) {
         throw new Error('Failed to fetch comments');
@@ -34,7 +34,7 @@ const CommentSection = ({ postId }) => {
 
   const addComment = async (content) => {
     try {
-      const response = await fetch(`http://localhost:3000/api/posts/${postId}/comments`, {
+      const response = await fetch(`https://codefolio-4.onrender.com/api/posts/${postId}/comments`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -60,7 +60,7 @@ const CommentSection = ({ postId }) => {
     // Based on your backend structure, you might need to implement a dedicated endpoint for replies
     // This is a simplified example
     try {
-      const response = await fetch(`http://localhost:3000/api/comments/${commentId}/replies`, {
+      const response = await fetch(`https://codefolio-4.onrender.com/api/comments/${commentId}/replies`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
